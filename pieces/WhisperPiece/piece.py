@@ -5,15 +5,15 @@ import whisper
 
 class WhisperPiece(BasePiece):
 
-    def piece_function(self, input_model: InputModel):
+    def piece_function(self, input_data: InputModel):
 
         self.logger.info("Loading model...")
-        model = whisper.load_model(input_model.model_size)
+        model = whisper.load_model(input_data.model_size)
 
         self.logger.info("Transcribing audio file...")
-        result = model.transcribe(str(input_model.file_path))["text"]
+        result = model.transcribe(str(input_data.file_path))["text"]
 
-        if input_model.output_type == "xcom":
+        if input_data.output_type == "xcom":
             self.logger.info("Transcription complete successfully. Result returned as XCom.")
             msg = f"Transcription complete successfully. Result returned as XCom."
             transcription_result = result
