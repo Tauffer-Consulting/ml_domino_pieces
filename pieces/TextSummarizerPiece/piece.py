@@ -35,10 +35,10 @@ def summarize_long_text(text: str, summarizer, iteration: int=0):
 
 class TextSummarizerPiece(BasePiece):
 
-    def piece_function(self, input_model: InputModel):
+    def piece_function(self, input_data: InputModel):
 
         # Set device
-        if input_model.use_gpu and torch.cuda.is_available():
+        if input_data.use_gpu and torch.cuda.is_available():
             device = torch.cuda.current_device()
             self.logger.info("Using GPU for inference.")
         else:
@@ -46,11 +46,11 @@ class TextSummarizerPiece(BasePiece):
             self.logger.info("Using CPU for inference.")
 
         # Load text
-        if input_model.input_file_path:
-            with open(input_model.input_file_path, "r") as f:
+        if input_data.input_file_path:
+            with open(input_data.input_file_path, "r") as f:
                 text_str = f.read()
         else:
-            text_str = input_model.input_text
+            text_str = input_data.input_text
         
         # Load summarizer
         self.logger.info("Loading summarizer...")
@@ -66,7 +66,7 @@ class TextSummarizerPiece(BasePiece):
         result = summarize_long_text(text=text_str, summarizer=summarizer)
 
         # Return result
-        if input_model.output_type == "xcom":
+        if input_data.output_type == "xcom":
             self.logger.info("Summarization completed successfully. Result returned as XCom.")
             msg = f"Summarization completed successfully. Result returned as XCom."
             summary_result = result
