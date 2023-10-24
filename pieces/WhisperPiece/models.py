@@ -20,8 +20,9 @@ class InputModel(BaseModel):
     """
     Input data for WhisperPiece
     """
-    file_path: Union[FilePath, str] = Field(
+    file_path: str = Field(
         description='The path to the text file to process.',
+        required=True
     )
     model_size: ModelSizeType = Field(
         description='The size of the model to use.',

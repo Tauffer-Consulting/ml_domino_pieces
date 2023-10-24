@@ -12,7 +12,7 @@ class InputModel(BaseModel):
     """
     Input data for TextSummarizerPiece
     """
-    input_file_path: Union[FilePath, str] = Field(
+    input_file_path: str = Field(
         description='The path to the text file to summarize.',
         default=""
     )
