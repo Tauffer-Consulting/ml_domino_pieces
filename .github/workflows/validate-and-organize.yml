@@ -3,7 +3,7 @@ name: Validate and organize repo, build and publish Docker images
 on:
   push:
     branches:
-      - main
+      - tests
     paths:
       - 'config.toml'
 

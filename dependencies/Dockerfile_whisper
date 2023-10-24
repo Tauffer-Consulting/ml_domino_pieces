@@ -17,4 +17,4 @@ COPY .domino domino/pieces_repository/.domino
 RUN pip install -U openai-whisper==20230918
 
 # Dowload Whisper model
-RUN python3 -c "import whisper; whisper.load_model('base')"
+RUN python3 -c "import whisper; whisper.load_model('tiny')"
