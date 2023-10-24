@@ -1,14 +1,22 @@
 {
     "group0": {
         "dependency": {
-            "dockerfile": null,
-            "requirements_file": "requirements_0.txt"
+            "dockerfile": "Dockerfile_whisper",
+            "requirements_file": null
         },
         "pieces": [
-            "ExampleSimplePiece"
+            "WhisperPiece"
         ],
-        "secrets": [
-            "EXAMPLE_OPERATOR_SECRET_1"
-        ]
+        "secrets": []
+    },
+    "group1": {
+        "dependency": {
+            "dockerfile": "Dockerfile_summarizer",
+            "requirements_file": null
+        },
+        "pieces": [
+            "TextSummarizerPiece"
+        ],
+        "secrets": []
     }
 }
