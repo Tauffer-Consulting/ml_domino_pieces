@@ -21,8 +21,7 @@ class InputModel(BaseModel):
     Input data for WhisperPiece
     """
     file_path: str = Field(
-        description='The path to the text file to process.',
-        required=True
+        description='The path to the text file to process.'
     )
     model_size: ModelSizeType = Field(
         description='The size of the model to use.',

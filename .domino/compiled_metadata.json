@@ -38,7 +38,6 @@
                 "file_path": {
                     "title": "File Path",
                     "description": "The path to the text file to process.",
-                    "required": true,
                     "type": "string"
                 },
                 "model_size": {
@@ -121,7 +120,7 @@
             }
         },
         "secrets_schema": null,
-        "source_url": "Tauffer-Consulting/ml_domino_pieces//tree/main/pieces/WhisperPiece"
+        "source_url": "Tauffer-Consulting/ml_domino_pieces/tree/main/pieces/WhisperPiece"
     },
     "TextSummarizerPiece": {
         "name": "TextSummarizerPiece",
@@ -233,6 +232,6 @@
             }
         },
         "secrets_schema": null,
-        "source_url": "Tauffer-Consulting/ml_domino_pieces//tree/main/pieces/TextSummarizerPiece"
+        "source_url": "Tauffer-Consulting/ml_domino_pieces/tree/main/pieces/TextSummarizerPiece"
     }
 }
