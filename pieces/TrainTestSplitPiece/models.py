@@ -6,12 +6,13 @@ class InputModel(BaseModel):
     """
     Input data for TextSummarizerPiece
     """
-    data: Optional[List[dict]] = Field(
+    data: List[dict] = Field(
         title="Data",
+        default=None,
         description="The data to be split.",
         json_schema_extra={"from_upstream": "always"}
     )
-    data_path: Optional[str] = Field(
+    data_path: str = Field(
         title="Data Path",
         default=None,
         description="The path to the data to be split.",
