@@ -1,15 +1,15 @@
 {
-    "name": "TrainTestSplitPiece",
-    "description": "Split data into train and test sets",
+    "name": "StandardScalerPiece",
+    "description": "Apply StandardScaler to the data",
     "dependency": {
         "requirements_file": "requirements_0.txt"
     },
     "tags": [
         "preprocessing",
-        "datasets"
+        "scaler"
     ],
     "style": {
-        "node_label": "Split Data",
+        "node_label": "Standard Scaler",
         "node_style": {
             "backgroundColor": "#b3cde8"
         },
