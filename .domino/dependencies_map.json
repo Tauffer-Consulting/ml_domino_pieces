@@ -6,8 +6,8 @@
         },
         "pieces": [
             "StandardScalerPiece",
-            "PCAPiece",
-            "TrainTestSplitPiece"
+            "TrainTestSplitPiece",
+            "PCATrainPiece"
         ],
         "secrets": [],
         "source_image": "ghcr.io/tauffer-consulting/ml-domino-pieces:development-group0"
