@@ -1,5 +1,5 @@
 {
-    "name": "PCAPiece",
+    "name": "PCATrainPiece",
     "description": "Applies PCA to the input data",
     "dependency": {
         "requirements_file": "requirements_0.txt"
@@ -10,7 +10,7 @@
         "reduction"
     ],
     "style": {
-        "node_label": "PCA Piece",
+        "node_label": "PCA Train Piece",
         "node_style": {
             "backgroundColor": "#be3842"
         },

@@ -30,7 +30,6 @@ class StandardScalerPiece(BasePiece):
 
         if "target" not in df_train.columns or "target" not in df_test.columns:
             raise ValueError("Target column not found in data with name 'target'.")
-    
 
         scaler = StandardScaler()
         scaler.fit(df_train.drop('target', axis=1))
