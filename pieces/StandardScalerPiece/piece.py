@@ -6,7 +6,25 @@ from sklearn.preprocessing import StandardScaler
 
 class StandardScalerPiece(BasePiece):
 
+    def read_data_from_file(self, path):
+        """
+        Read data from a file.
+        """
+        if path.endswith(".csv"):
+            return pd.read_csv(path).to_dict(orient='records')
+        elif path.endswith(".json"):
+            return pd.read_json(path).to_dict(orient='records')
+        else:
+            raise ValueError("File type not supported.")
+
     def piece_function(self, input_data: InputModel):
+
+        if input_data.train_data_path:
+            input_data.train_data = self.read_data_from_file(path=input_data.train_data_path)
+
+        if input_data.test_data_path:
+            input_data.test_data = self.read_data_from_file(path=input_data.test_data_path)
+
         df_train = pd.DataFrame(input_data.train_data)
         df_test = pd.DataFrame(input_data.test_data)
 

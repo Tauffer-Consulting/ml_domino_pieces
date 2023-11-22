@@ -2,6 +2,7 @@ from domino.base_piece import BasePiece
 from .models import InputModel, OutputModel
 from sklearn.model_selection import train_test_split
 import pandas as pd
+from pathlib import Path
 
 
 class TrainTestSplitPiece(BasePiece):
@@ -33,4 +34,11 @@ class TrainTestSplitPiece(BasePiece):
         df_train = pd.concat([X_train, y_train], axis=1)
         df_test = pd.concat([X_test, y_test], axis=1)
 
-        return OutputModel(train_data=df_train.to_dict(orient='records'), test_data=df_test.to_dict(orient='records'))
+        if input_data.output_type != 'file':
+            return OutputModel(train_data=df_train.to_dict(orient='records'), test_data=df_test.to_dict(orient='records'))
+        
+        train_data_path = str(Path(self.results_path) / "train_data.csv")
+        test_data_path = str(Path(self.results_path) / "test_data.csv")
+
+        return OutputModel(train_data_path=train_data_path, test_data_path=test_data_path)
+
