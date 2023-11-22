@@ -6,7 +6,7 @@ class InputModel(BaseModel):
     """
     Input data for TextSummarizerPiece
     """
-    data = List[dict] = Field(
+    data: List[dict] = Field(
         title="Data",
         description="The data to be split.",
         json_schema_extra={"from_upstream": "always"}
