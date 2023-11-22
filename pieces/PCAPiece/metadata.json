@@ -1,0 +1,19 @@
+{
+    "name": "PCAPiece",
+    "description": "Applies PCA to the input data",
+    "dependency": {
+        "requirements_file": "requirements_0.txt"
+    },
+    "tags": [
+        "preprocessing",
+        "dimensionality",
+        "reduction"
+    ],
+    "style": {
+        "node_label": "PCA Piece",
+        "node_style": {
+            "backgroundColor": "#be3842"
+        },
+        "icon_class_name": "radix-icons:dimensions"
+    }
+}
