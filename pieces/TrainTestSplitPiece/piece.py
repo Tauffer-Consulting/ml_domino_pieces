@@ -6,10 +6,24 @@ import pandas as pd
 
 class TrainTestSplitPiece(BasePiece):
 
+    def read_data_from_file(self, path):
+        """
+        Read data from a file.
+        """
+        if path.endswith(".csv"):
+            return pd.read_csv(path).to_dict(orient='records')
+        elif path.endswith(".json"):
+            return pd.read_json(path).to_dict(orient='records')
+        else:
+            raise ValueError("File type not supported.")
+
     def piece_function(self, input_data: InputModel):
         """
         Split the data into training and test sets.
         """
+        if input_data.data_path is not None:
+            input_data.data = self.read_data_from_file(path=input_data.data_path)
+
         df = pd.DataFrame(input_data.data)
         if "target" not in df.columns:
             raise ValueError("Target column not found in data with name 'target'.")

@@ -1,14 +1,20 @@
 from pydantic import BaseModel, Field
-from typing import List
+from typing import List, Optional
 
 
 class InputModel(BaseModel):
     """
     Input data for TextSummarizerPiece
     """
-    data: List[dict] = Field(
+    data: Optional[List[dict]] = Field(
         title="Data",
         description="The data to be split.",
+        json_schema_extra={"from_upstream": "always"}
+    )
+    data_path: Optional[str] = Field(
+        title="Data Path",
+        default=None,
+        description="The path to the data to be split.",
         json_schema_extra={"from_upstream": "always"}
     )
     test_data_size: float = Field(
