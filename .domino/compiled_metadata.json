@@ -106,13 +106,34 @@
             "description": "Input data for TextSummarizerPiece",
             "properties": {
                 "data": {
+                    "anyOf": [
+                        {
+                            "items": {
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
                     "description": "The data to be split.",
                     "from_upstream": "always",
-                    "items": {
-                        "type": "object"
-                    },
-                    "title": "Data",
-                    "type": "array"
+                    "title": "Data"
+                },
+                "data_path": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "description": "The path to the data to be split.",
+                    "from_upstream": "always",
+                    "title": "Data Path"
                 },
                 "test_data_size": {
                     "default": 0.8,
