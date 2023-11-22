@@ -18,7 +18,7 @@ class InputModel(BaseModel):
     )
     test_data: Optional[List[dict]] = Field(
         title="Test Data",
-        default=None
+        default=None,
         description="The test data to be scaled.",
         json_schema_extra={"from_upstream": "always"}
     )
