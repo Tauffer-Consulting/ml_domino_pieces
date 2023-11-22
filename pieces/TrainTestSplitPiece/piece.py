@@ -40,5 +40,8 @@ class TrainTestSplitPiece(BasePiece):
         train_data_path = str(Path(self.results_path) / "train_data.csv")
         test_data_path = str(Path(self.results_path) / "test_data.csv")
 
+        df_train.to_csv(train_data_path, index=False)
+        df_test.to_csv(test_data_path, index=False)
+
         return OutputModel(train_data_path=train_data_path, test_data_path=test_data_path)
 

@@ -2,7 +2,7 @@ from domino.base_piece import BasePiece
 from .models import InputModel, OutputModel
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
-
+from pathlib import Path
 
 class StandardScalerPiece(BasePiece):
 
@@ -42,6 +42,16 @@ class StandardScalerPiece(BasePiece):
         df_test_scaled = pd.DataFrame(X_test, columns=df_test.drop('target', axis=1).columns)
         df_test_scaled['target'] = df_test['target']
 
-        return OutputModel(train_data=df_train_scaled.to_dict(orient='records'), test_data=df_test_scaled.to_dict(orient='records'))
+        if input_data.output_type != 'file':
+            return OutputModel(train_data=df_train_scaled.to_dict(orient='records'), test_data=df_test_scaled.to_dict(orient='records'))
+
+        train_data_path = str(Path(self.results_path) / "scaled_train_data.csv")
+        test_data_path = str(Path(self.results_path) / "scaled_test_data.csv")
+
+        df_train_scaled.to_csv(train_data_path, index=False)
+        df_test_scaled.to_csv(test_data_path, index=False)
+
+        return OutputModel(train_data_path=train_data_path, test_data_path=test_data_path)
+
         
             
