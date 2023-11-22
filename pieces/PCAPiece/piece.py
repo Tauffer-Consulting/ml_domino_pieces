@@ -5,7 +5,7 @@ import pandas as pd
 from pathlib import Path
 import plotly.express as px
 
-class TrainTestSplitPiece(BasePiece):
+class PCAPiece(BasePiece):
 
     def read_data_from_file(self, path):
         """
