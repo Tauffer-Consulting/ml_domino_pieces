@@ -1,22 +1,14 @@
 {
     "group0": {
         "dependency": {
-            "dockerfile": "Dockerfile_whisper",
-            "requirements_file": null
+            "dockerfile": null,
+            "requirements_file": "requirements_0.txt"
         },
         "pieces": [
-            "WhisperPiece"
+            "StandardScalerPiece",
+            "TrainTestSplitPiece"
         ],
-        "secrets": []
-    },
-    "group1": {
-        "dependency": {
-            "dockerfile": "Dockerfile_summarizer",
-            "requirements_file": null
-        },
-        "pieces": [
-            "TextSummarizerPiece"
-        ],
-        "secrets": []
+        "secrets": [],
+        "source_image": "ghcr.io/tauffer-consulting/ml-domino-pieces:development-group0"
     }
 }

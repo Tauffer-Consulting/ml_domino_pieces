@@ -1,237 +1,164 @@
 {
-    "WhisperPiece": {
-        "name": "WhisperPiece",
+    "StandardScalerPiece": {
+        "name": "StandardScalerPiece",
         "dependency": {
-            "dockerfile": "Dockerfile_whisper",
-            "requirements_file": null
+            "dockerfile": null,
+            "requirements_file": "requirements_0.txt"
         },
-        "tags": [],
+        "tags": [
+            "preprocessing",
+            "scaler"
+        ],
         "style": {
-            "node_label": "Wisper Piece",
+            "node_label": "Standard Scaler",
             "node_type": "default",
             "node_style": {
-                "backgroundColor": "#ebebeb"
+                "backgroundColor": "#b3cde8"
             },
             "useIcon": true,
-            "icon_class_name": "fa-solid:comment-dots",
+            "icon_class_name": "icon-park-outline:split",
             "iconStyle": {
                 "cursor": "pointer"
             }
         },
-        "description": "Whisper is a general-purpose speech recognition model. Ref: https://github.com/openai/whisper",
-        "container_resources": {
-            "use_gpu": true,
-            "requests": {
-                "cpu": "1000m",
-                "memory": "3Gi"
-            },
-            "limits": {
-                "cpu": "5000m",
-                "memory": "15Gi"
-            }
-        },
+        "description": "Apply StandardScaler to the data",
         "input_schema": {
-            "title": "InputModel",
-            "description": "Input data for WhisperPiece",
-            "type": "object",
+            "description": "Input data for TextSummarizerPiece",
             "properties": {
-                "file_path": {
-                    "title": "File Path",
-                    "description": "The path to the text file to process.",
-                    "type": "string"
+                "train_data": {
+                    "description": "The train data to be scaled.",
+                    "from_upstream": "always",
+                    "items": {
+                        "type": "object"
+                    },
+                    "title": "Train Data",
+                    "type": "array"
                 },
-                "model_size": {
-                    "description": "The size of the model to use.",
-                    "default": "base",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/ModelSizeType"
-                        }
-                    ]
-                },
-                "output_type": {
-                    "description": "The type of output fot the result text.",
-                    "default": "xcom",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/OutputTypeType"
-                        }
-                    ]
+                "test_data": {
+                    "description": "The test data to be scaled.",
+                    "from_upstream": "always",
+                    "items": {
+                        "type": "object"
+                    },
+                    "title": "Test Data",
+                    "type": "array"
                 }
             },
             "required": [
-                "file_path"
+                "train_data",
+                "test_data"
             ],
-            "definitions": {
-                "ModelSizeType": {
-                    "title": "ModelSizeType",
-                    "description": "An enumeration.",
-                    "enum": [
-                        "tiny",
-                        "base",
-                        "small",
-                        "medium",
-                        "large"
-                    ],
-                    "type": "string"
-                },
-                "OutputTypeType": {
-                    "title": "OutputTypeType",
-                    "description": "An enumeration.",
-                    "enum": [
-                        "xcom",
-                        "file"
-                    ],
-                    "type": "string"
-                }
-            }
+            "title": "InputModel",
+            "type": "object"
         },
         "output_schema": {
-            "title": "OutputModel",
-            "description": "Output data for WhisperPiece",
-            "type": "object",
+            "description": "Output data for TextSummarizerPiece",
             "properties": {
-                "message": {
-                    "title": "Message",
-                    "description": "Output message to log.",
-                    "default": "",
-                    "type": "string"
+                "train_data": {
+                    "items": {
+                        "type": "object"
+                    },
+                    "title": "Train Data",
+                    "type": "array"
                 },
-                "transcription_result": {
-                    "title": "Transcription Result",
-                    "description": "The result transcription text.",
-                    "default": "",
-                    "type": "string"
-                },
-                "file_path": {
-                    "title": "File Path",
-                    "description": "The path to the results text file.",
-                    "default": "",
-                    "anyOf": [
-                        {
-                            "type": "string",
-                            "format": "file-path"
-                        },
-                        {
-                            "type": "string"
-                        }
-                    ]
+                "test_data": {
+                    "items": {
+                        "type": "object"
+                    },
+                    "title": "Test Data",
+                    "type": "array"
                 }
-            }
+            },
+            "required": [
+                "train_data",
+                "test_data"
+            ],
+            "title": "OutputModel",
+            "type": "object"
         },
         "secrets_schema": null,
-        "source_url": "Tauffer-Consulting/ml_domino_pieces/tree/main/pieces/WhisperPiece"
+        "source_url": "https://github.com/Tauffer-Consulting/ml_domino_pieces/tree/main/pieces/StandardScalerPiece"
     },
-    "TextSummarizerPiece": {
-        "name": "TextSummarizerPiece",
+    "TrainTestSplitPiece": {
+        "name": "TrainTestSplitPiece",
         "dependency": {
-            "dockerfile": "Dockerfile_summarizer",
-            "requirements_file": null
+            "dockerfile": null,
+            "requirements_file": "requirements_0.txt"
         },
-        "tags": [],
+        "tags": [
+            "preprocessing",
+            "datasets"
+        ],
         "style": {
-            "node_label": "Text Summarizer Piece",
+            "node_label": "Split Data",
             "node_type": "default",
             "node_style": {
-                "backgroundColor": "#ebebeb"
+                "backgroundColor": "#b3cde8"
             },
             "useIcon": true,
-            "icon_class_name": "fa-solid:quote-left",
+            "icon_class_name": "icon-park-outline:split",
             "iconStyle": {
                 "cursor": "pointer"
             }
         },
-        "description": "Text summarizer Piece",
-        "container_resources": {
-            "use_gpu": true,
-            "requests": {
-                "cpu": "1000m",
-                "memory": "3Gi"
-            },
-            "limits": {
-                "cpu": "5000m",
-                "memory": "15Gi"
-            }
-        },
+        "description": "Split data into train and test sets",
         "input_schema": {
-            "title": "InputModel",
             "description": "Input data for TextSummarizerPiece",
-            "type": "object",
             "properties": {
-                "input_file_path": {
-                    "title": "Input File Path",
-                    "description": "The path to the text file to summarize.",
-                    "default": "",
-                    "type": "string"
+                "data": {
+                    "description": "The data to be split.",
+                    "from_upstream": "always",
+                    "items": {
+                        "type": "object"
+                    },
+                    "title": "Data",
+                    "type": "array"
                 },
-                "input_text": {
-                    "title": "Input Text",
-                    "description": "The text to summarize.",
-                    "default": "",
-                    "type": "string"
+                "test_data_size": {
+                    "default": 0.8,
+                    "description": "The size (%) of the test data.",
+                    "title": "Test Data Size",
+                    "type": "number"
                 },
-                "output_type": {
-                    "description": "The type of output fot the result text.",
-                    "default": "xcom",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/OutputTypeType"
-                        }
-                    ]
-                },
-                "use_gpu": {
-                    "title": "Use Gpu",
-                    "description": "Use GPU for inference.",
-                    "default": false,
-                    "type": "boolean"
+                "random_state": {
+                    "default": 42,
+                    "description": "The random state for the split.",
+                    "title": "Random State",
+                    "type": "integer"
                 }
             },
-            "definitions": {
-                "OutputTypeType": {
-                    "title": "OutputTypeType",
-                    "description": "An enumeration.",
-                    "enum": [
-                        "xcom",
-                        "file"
-                    ],
-                    "type": "string"
-                }
-            }
+            "required": [
+                "data"
+            ],
+            "title": "InputModel",
+            "type": "object"
         },
         "output_schema": {
-            "title": "OutputModel",
             "description": "Output data for TextSummarizerPiece",
-            "type": "object",
             "properties": {
-                "message": {
-                    "title": "Message",
-                    "description": "Output message to log.",
-                    "default": "",
-                    "type": "string"
+                "train_data": {
+                    "items": {
+                        "type": "object"
+                    },
+                    "title": "Train Data",
+                    "type": "array"
                 },
-                "summary_result": {
-                    "title": "Summary Result",
-                    "description": "The result summarized text.",
-                    "default": "",
-                    "type": "string"
-                },
-                "file_path": {
-                    "title": "File Path",
-                    "description": "The path to the resulting summarized text file.",
-                    "default": "",
-                    "anyOf": [
-                        {
-                            "type": "string",
-                            "format": "file-path"
-                        },
-                        {
-                            "type": "string"
-                        }
-                    ]
+                "test_data": {
+                    "items": {
+                        "type": "object"
+                    },
+                    "title": "Test Data",
+                    "type": "array"
                 }
-            }
+            },
+            "required": [
+                "train_data",
+                "test_data"
+            ],
+            "title": "OutputModel",
+            "type": "object"
         },
         "secrets_schema": null,
-        "source_url": "Tauffer-Consulting/ml_domino_pieces/tree/main/pieces/TextSummarizerPiece"
+        "source_url": "https://github.com/Tauffer-Consulting/ml_domino_pieces/tree/main/pieces/TrainTestSplitPiece"
     }
 }
