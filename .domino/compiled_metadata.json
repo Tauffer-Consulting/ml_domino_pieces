@@ -90,15 +90,15 @@
         "input_schema": {
             "properties": {
                 "data_path": {
-                    "description": "The path to the train data to apply PCA.",
+                    "description": "The path to data to apply t-SNE.",
                     "from_upstream": "always",
-                    "title": "Train Data Path",
+                    "title": "Data Path",
                     "type": "string"
                 },
                 "n_components": {
                     "default": 2,
-                    "description": "The number of components for PCA.",
-                    "title": "Number of Components",
+                    "description": "The number of dimensions t-SNE.",
+                    "title": "Number of Dimensions",
                     "type": "integer"
                 },
                 "use_class_column": {
@@ -163,7 +163,7 @@
                 "data_path": {
                     "description": "The path to the train data to apply PCA.",
                     "from_upstream": "always",
-                    "title": "Train Data Path",
+                    "title": "Data Path",
                     "type": "string"
                 },
                 "use_class_column": {
@@ -448,15 +448,15 @@
         "input_schema": {
             "properties": {
                 "data_path": {
-                    "description": "The path to the train data to apply PCA.",
+                    "description": "The path to the data to apply UMAP.",
                     "from_upstream": "always",
-                    "title": "Train Data Path",
+                    "title": "Data Path",
                     "type": "string"
                 },
                 "n_components": {
                     "default": 2,
-                    "description": "The number of components for PCA.",
-                    "title": "Number of Components",
+                    "description": "The number of dimensions for UMAP.",
+                    "title": "Number of Dimensions",
                     "type": "integer"
                 },
                 "use_class_column": {
