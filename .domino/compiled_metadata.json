@@ -360,7 +360,7 @@
             "description": "Input data for TextSummarizerPiece",
             "properties": {
                 "data_path": {
-                    "default": null,
+                    "default": "",
                     "description": "The path to the train data to apply PCA.",
                     "from_upstream": "always",
                     "title": "Train Data Path",
