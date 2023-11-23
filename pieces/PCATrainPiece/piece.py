@@ -21,7 +21,6 @@ class PCATrainPiece(BasePiece):
             raise ValueError("File type not supported.")
 
     def piece_function(self, input_data: InputModel):
-
         df = self.read_data_from_file(input_data.data_path)
 
         if "target" not in df.columns or "target" not in df.columns:
