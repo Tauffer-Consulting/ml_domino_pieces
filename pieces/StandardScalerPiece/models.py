@@ -7,9 +7,6 @@ class OutputType(str, Enum):
     object = "object"
 
 class InputModel(BaseModel):
-    """
-    Input data for TextSummarizerPiece
-    """
     train_data: Optional[List[dict]] = Field(
         title="Train Data",
         default=None,
@@ -43,9 +40,6 @@ class InputModel(BaseModel):
 
 
 class OutputModel(BaseModel):
-    """
-    Output data for TextSummarizerPiece
-    """
     train_data: Optional[List[dict]] = None
     test_data: Optional[List[dict]] = None
 
