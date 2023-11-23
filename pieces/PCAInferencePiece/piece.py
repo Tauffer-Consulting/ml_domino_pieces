@@ -57,7 +57,7 @@ class PCAInferencePiece(BasePiece):
             row=1, col=1
         )
 
-        if input_data.n_components >= 2:
+        if pca.n_components >= 2:
             for i, target_value in enumerate(unique_targets):
                 filtered_data = pca_df[pca_df['target'] == target_value]
 
