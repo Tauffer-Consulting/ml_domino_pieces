@@ -85,8 +85,13 @@ class PCATrainPiece(BasePiece):
                 bgcolor='LightSteelBlue',
                 bordercolor='gray',
                 borderwidth=1
-            )
+            ),
         )
+
+        fig.update_xaxes(title_text='Explained Variance Ratio', row=1, col=1)
+        fig.update_yaxes(title_text='Principal Component', row=1, col=1)
+        fig.update_xaxes(title_text='Principal Component 0', row=2, col=1)
+        fig.update_yaxes(title_text='Principal Component 1', row=2, col=1)
 
         json_path = str(Path(self.results_path) / "pca_explained_variance_ratio.json")
         fig.write_json(json_path)
