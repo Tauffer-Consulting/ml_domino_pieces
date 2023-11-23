@@ -57,27 +57,26 @@ class PCAInferencePiece(BasePiece):
             row=1, col=1
         )
 
-        # Add scatterplot to the first component
-        for i, target_value in enumerate(unique_targets):
-            # Filter the data for each target value
-            filtered_data = pca_df[pca_df['target'] == target_value]
+        if input_data.n_components >= 2:
+            for i, target_value in enumerate(unique_targets):
+                filtered_data = pca_df[pca_df['target'] == target_value]
 
-            color = color_scale[0]
-            if input_data.use_class_column:
-                color = color_scale[i % len(color_scale)]
+                color = color_scale[0]
+                if input_data.use_class_column:
+                    color = color_scale[i % len(color_scale)]
 
-            fig.add_trace(
-                go.Scatter(
-                    x=filtered_data['pca_0'],
-                    y=filtered_data['pca_1'],
-                    mode='markers',
-                    name=f'Target: {target_value}',
-                    marker=dict(
-                        color=color,
+                fig.add_trace(
+                    go.Scatter(
+                        x=filtered_data['pca_0'],
+                        y=filtered_data['pca_1'],
+                        mode='markers',
+                        name=f'Target: {target_value}',
+                        marker=dict(
+                            color=color,
+                        ),
                     ),
-                ),
-                row=2, col=1
-            )
+                    row=2, col=1
+                )
 
         fig.update_layout(
             legend=dict(

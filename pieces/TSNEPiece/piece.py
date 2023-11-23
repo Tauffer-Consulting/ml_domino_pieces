@@ -1,0 +1,54 @@
+from domino.base_piece import BasePiece
+from .models import InputModel, OutputModel
+from sklearn.manifold import TSNE
+import pandas as pd
+from pathlib import Path
+from plotly.subplots import make_subplots
+import plotly.graph_objects as go
+import plotly.express as px
+import pickle as pk
+
+class TSNEPiece(BasePiece):
+
+    def read_data_from_file(self, path):
+        if path.endswith(".csv"):
+            return pd.read_csv(path)
+        elif path.endswith(".json"):
+            return pd.read_json(path)
+        else:
+            raise ValueError("File type not supported.")
+
+    def piece_function(self, input_data: InputModel):
+        df = self.read_data_from_file(input_data.data_path)
+
+        if "target" not in df.columns or "target" not in df.columns:
+            raise ValueError("Target column not found in data with name 'target'.")
+
+        tsne = TSNE(n_components=input_data.n_components)
+        X_tsne = tsne.fit_transform(df.drop('target', axis=1))
+        tsne_df = pd.DataFrame(tsne.embedding_, columns=[f'tsne_{i}' for i in range(input_data.n_components)])
+
+        if input_data.n_components >= 2:
+            fig = px.scatter(x=X_tsne[:, 0], y=X_tsne[:, 1], color=df['target'])
+            fig.update_layout(
+                title="t-SNE visualization of Custom Classification dataset",
+                xaxis_title="First t-SNE",
+                yaxis_title="Second t-SNE",
+            )
+            json_path = str(Path(self.results_path) / "tsne_figure.json")
+            fig.write_json(json_path)
+            self.display_result = {
+                'file_type': 'plotly_json',
+                'file_path': json_path
+            }
+
+        tsne_data_path = str(Path(self.results_path) / "tsne_data.csv")
+        tsne_df.to_csv(tsne_data_path, index=False)
+
+        return OutputModel(
+            tsne_data_path=tsne_data_path,
+        )
+
+
+
+
