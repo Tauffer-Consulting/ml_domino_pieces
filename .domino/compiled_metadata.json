@@ -63,6 +63,71 @@
         "secrets_schema": null,
         "source_url": "https://github.com/Tauffer-Consulting/ml_domino_pieces/tree/main/pieces/StandardScalerPiece"
     },
+    "TSNEPiece": {
+        "name": "TSNEPiece",
+        "dependency": {
+            "dockerfile": null,
+            "requirements_file": "requirements_0.txt"
+        },
+        "tags": [
+            "preprocessing",
+            "dimensionality",
+            "reduction"
+        ],
+        "style": {
+            "node_label": "t-SNE Piece",
+            "node_type": "default",
+            "node_style": {
+                "backgroundColor": "#ed87ec"
+            },
+            "useIcon": true,
+            "icon_class_name": "radix-icons:dimensions",
+            "iconStyle": {
+                "cursor": "pointer"
+            }
+        },
+        "description": "Applies t-SNE to the data",
+        "input_schema": {
+            "properties": {
+                "data_path": {
+                    "description": "The path to the train data to apply PCA.",
+                    "from_upstream": "always",
+                    "title": "Train Data Path",
+                    "type": "string"
+                },
+                "n_components": {
+                    "default": 2,
+                    "description": "The number of components for PCA.",
+                    "title": "Number of Components",
+                    "type": "integer"
+                },
+                "use_class_column": {
+                    "default": false,
+                    "description": "Whether to use the target column as class to plot.",
+                    "title": "Use Class Column",
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "data_path"
+            ],
+            "title": "InputModel",
+            "type": "object"
+        },
+        "output_schema": {
+            "properties": {
+                "tsne_data_path": {
+                    "default": null,
+                    "title": "Tsne Data Path",
+                    "type": "string"
+                }
+            },
+            "title": "OutputModel",
+            "type": "object"
+        },
+        "secrets_schema": null,
+        "source_url": "https://github.com/Tauffer-Consulting/ml_domino_pieces/tree/main/pieces/TSNEPiece"
+    },
     "PCAInferencePiece": {
         "name": "PCAInferencePiece",
         "dependency": {
