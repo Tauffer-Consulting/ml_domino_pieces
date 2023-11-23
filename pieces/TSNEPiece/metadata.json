@@ -12,7 +12,7 @@
     "style": {
         "node_label": "t-SNE Piece",
         "node_style": {
-            "backgroundColor": "#ed87ec"
+            "backgroundColor": "#38b2be"
         },
         "icon_class_name": "radix-icons:dimensions"
     }

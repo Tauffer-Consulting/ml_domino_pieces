@@ -78,18 +78,17 @@ class PCATrainPiece(BasePiece):
                 )
 
         fig.update_layout(
+            title="PCA Projection - First two dimensions",
             legend=dict(
                 traceorder='normal',
-                bgcolor='LightSteelBlue',
-                bordercolor='gray',
-                borderwidth=1
             ),
+            plot_bgcolor='rgba(255, 255, 255, 1)'
         )
 
-        fig.update_xaxes(title_text='Explained Variance Ratio', row=1, col=1)
-        fig.update_yaxes(title_text='Principal Component', row=1, col=1)
-        fig.update_xaxes(title_text='Principal Component 0', row=2, col=1)
-        fig.update_yaxes(title_text='Principal Component 1', row=2, col=1)
+        fig.update_xaxes(title_text='Explained Variance Ratio', row=1, col=1, showgrid=True, gridcolor='lightgray', zeroline=True, zerolinecolor='black')
+        fig.update_yaxes(title_text='Principal Component', row=1, col=1, showgrid=True, gridcolor='lightgray', zeroline=True, zerolinecolor='black')
+        fig.update_xaxes(title_text='PC 1', row=2, col=1, showgrid=True, gridcolor='lightgray', zeroline=True, zerolinecolor='black')
+        fig.update_yaxes(title_text='PC 2', row=2, col=1, showgrid=True, gridcolor='lightgray', zeroline=True, zerolinecolor='black')
 
         json_path = str(Path(self.results_path) / "pca_explained_variance_ratio.json")
         fig.write_json(json_path)

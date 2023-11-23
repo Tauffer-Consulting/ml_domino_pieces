@@ -33,10 +33,13 @@ class TSNEPiece(BasePiece):
             else:
                 fig = px.scatter(tsne_df, x='tsne_0', y='tsne_1')
             fig.update_layout(
-                title="t-SNE Visualization of Data",
-                xaxis_title="First t-SNE",
-                yaxis_title="Second t-SNE",
+                title="t-SNE Projection - First two dimensions",
+                xaxis_title="First Dimension",
+                yaxis_title="Second Dimension",
+                plot_bgcolor='rgba(255, 255, 255, 1)'
             )
+            fig.update_xaxes(showgrid=True, gridcolor='lightgray', zeroline=True, zerolinecolor='black')
+            fig.update_yaxes(showgrid=True, gridcolor='lightgray', zeroline=True, zerolinecolor='black')
             fig.update_coloraxes(showscale=False)
             json_path = str(Path(self.results_path) / "tsne_figure.json")
             fig.write_json(json_path)

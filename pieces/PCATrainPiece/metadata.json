@@ -12,7 +12,7 @@
     "style": {
         "node_label": "PCA Train Piece",
         "node_style": {
-            "backgroundColor": "#be3842"
+            "backgroundColor": "#38b2be"
         },
         "icon_class_name": "radix-icons:dimensions"
     }

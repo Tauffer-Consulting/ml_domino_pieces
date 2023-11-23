@@ -44,12 +44,21 @@ class UMAPPiece(BasePiece):
             else:
                 fig = px.scatter(
                     df,
-                    x='UMAP_Component_1',
-                    y='UMAP_Component_2',
+                    x='First Dimension',
+                    y='Second Dimension',
                     title='UMAP Visualization of Data',
                 )
                 fig.update_coloraxes(showscale=False)
-            json_path = str(Path(self.results_path) / "tsne_figure.json")
+
+            fig.update_layout(
+                title="UMAP Projection - First two dimensions",
+                xaxis_title="First Dimension",
+                yaxis_title="Second Dimension",
+                plot_bgcolor='rgba(255, 255, 255, 1)'
+            )
+            fig.update_xaxes(showgrid=True, gridcolor='lightgray', zeroline=True, zerolinecolor='black')
+            fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='lightgray', zeroline=True, zerolinecolor='black')
+            json_path = str(Path(self.results_path) / "umap_figure.json")
             fig.write_json(json_path)
             self.display_result = {
                 'file_type': 'plotly_json',
