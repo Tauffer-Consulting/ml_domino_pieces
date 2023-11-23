@@ -28,17 +28,17 @@ class UMAPPiece(BasePiece):
         umap_proj = umap_model.fit_transform(df.drop('target', axis=1))
 
         # Adding UMAP components to DataFrame
-        df['UMAP_Component_1'] = umap_proj[:, 0]
-        df['UMAP_Component_2'] = umap_proj[:, 1]
+        df['First Dimension'] = umap_proj[:, 0]
+        df['Second Dimension'] = umap_proj[:, 1]
 
         if input_data.n_components >= 2:
             if input_data.use_class_column:
                 fig = px.scatter(
                     df,
-                    x='UMAP_Component_1',
-                    y='UMAP_Component_2',
+                    x='First Dimension',
+                    y='Second Dimension',
                     color='target',
-                    title='UMAP Visualization of Data',
+                    title='UMAP Projection - First two dimensions',
                 )
                 fig.update_coloraxes(showscale=False)
             else:
@@ -46,7 +46,7 @@ class UMAPPiece(BasePiece):
                     df,
                     x='First Dimension',
                     y='Second Dimension',
-                    title='UMAP Visualization of Data',
+                    title='UMAP Projection - First two dimensions',
                 )
                 fig.update_coloraxes(showscale=False)
 
