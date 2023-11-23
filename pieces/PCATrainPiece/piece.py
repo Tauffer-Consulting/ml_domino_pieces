@@ -5,6 +5,7 @@ import pandas as pd
 from pathlib import Path
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
+import plotly.express as px
 import pickle as pk
 
 class PCATrainPiece(BasePiece):
@@ -39,34 +40,52 @@ class PCATrainPiece(BasePiece):
         })
         barplot_df.sort_values(by='Explained Variance Ratio', ascending=True, inplace=True)
 
+                # Assuming pca_df['target'] contains categorical values for different groups
+        unique_targets = pca_df['target'].unique()
+
+        # Using Plotly color scales to generate colors dynamically
+        color_scale = px.colors.qualitative.Bold
+
         fig = make_subplots(rows=2, cols=1)
         fig.add_trace(
             go.Bar(
-                x=barplot_df['Explained Variance Ratio'], 
-                y=barplot_df['Principal Component'], 
+                x=barplot_df['Explained Variance Ratio'],
+                y=barplot_df['Principal Component'],
                 name='Explained Variance Ratio',
                 orientation='h'
             ),
             row=1, col=1
         )
 
-        markers = {}
-        if input_data.use_class_column:
-            markers = dict(
-                color=pca_df['target'],
+        # Add scatterplot to the first component
+        for i, target_value in enumerate(unique_targets):
+            # Filter the data for each target value
+            filtered_data = pca_df[pca_df['target'] == target_value]
+
+            color = color_scale[0]
+            if input_data.use_class_column:
+                color = color_scale[i % len(color_scale)]
+
+            fig.add_trace(
+                go.Scatter(
+                    x=filtered_data['pca_0'],
+                    y=filtered_data['pca_1'],
+                    mode='markers',
+                    name=f'Target: {target_value}',
+                    marker=dict(
+                        color=color,
+                    ),
+                ),
+                row=2, col=1
             )
-        # add scatterplot to the first component
-        fig.add_trace(
-            go.Scatter(
-                x=pca_df['pca_0'], 
-                y=pca_df['pca_1'], 
-                mode='markers',
-                name='Scatter Plot of First Two Principal Components',
-                marker=markers,
-                legendgroup='target'
-            ),
-            row=2, 
-            col=1,
+
+        fig.update_layout(
+            legend=dict(
+                traceorder='normal',
+                bgcolor='LightSteelBlue',
+                bordercolor='gray',
+                borderwidth=1
+            )
         )
 
         json_path = str(Path(self.results_path) / "pca_explained_variance_ratio.json")
