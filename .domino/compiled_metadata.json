@@ -47,16 +47,18 @@
         "output_schema": {
             "properties": {
                 "train_data_path": {
-                    "default": null,
                     "title": "Train Data Path",
                     "type": "string"
                 },
                 "test_data_path": {
-                    "default": null,
                     "title": "Test Data Path",
                     "type": "string"
                 }
             },
+            "required": [
+                "train_data_path",
+                "test_data_path"
+            ],
             "title": "OutputModel",
             "type": "object"
         },
@@ -218,48 +220,12 @@
         },
         "description": "Split data into train and test sets",
         "input_schema": {
-            "$defs": {
-                "OutputType": {
-                    "enum": [
-                        "file",
-                        "object"
-                    ],
-                    "title": "OutputType",
-                    "type": "string"
-                }
-            },
-            "description": "Input data for TextSummarizerPiece",
             "properties": {
-                "data": {
-                    "anyOf": [
-                        {
-                            "items": {
-                                "type": "object"
-                            },
-                            "type": "array"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "default": null,
-                    "description": "The data to be split.",
-                    "from_upstream": "always",
-                    "title": "Data"
-                },
                 "data_path": {
-                    "anyOf": [
-                        {
-                            "type": "string"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "default": null,
                     "description": "The path to the data to be split.",
                     "from_upstream": "always",
-                    "title": "Data Path"
+                    "title": "Data Path",
+                    "type": "string"
                 },
                 "test_data_size": {
                     "default": 0.8,
@@ -272,79 +238,29 @@
                     "description": "The random state for the split.",
                     "title": "Random State",
                     "type": "integer"
-                },
-                "output_type": {
-                    "allOf": [
-                        {
-                            "$ref": "#/$defs/OutputType"
-                        }
-                    ],
-                    "default": "object",
-                    "description": "The output type. Use file for large datasets.",
-                    "title": "Output Type"
                 }
             },
+            "required": [
+                "data_path"
+            ],
             "title": "InputModel",
             "type": "object"
         },
         "output_schema": {
-            "description": "Output data for TextSummarizerPiece",
             "properties": {
-                "train_data": {
-                    "anyOf": [
-                        {
-                            "items": {
-                                "type": "object"
-                            },
-                            "type": "array"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "default": null,
-                    "title": "Train Data"
-                },
-                "test_data": {
-                    "anyOf": [
-                        {
-                            "items": {
-                                "type": "object"
-                            },
-                            "type": "array"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "default": null,
-                    "title": "Test Data"
-                },
                 "train_data_path": {
-                    "anyOf": [
-                        {
-                            "type": "string"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "default": null,
-                    "title": "Train Data Path"
+                    "title": "Train Data Path",
+                    "type": "string"
                 },
                 "test_data_path": {
-                    "anyOf": [
-                        {
-                            "type": "string"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "default": null,
-                    "title": "Test Data Path"
+                    "title": "Test Data Path",
+                    "type": "string"
                 }
             },
+            "required": [
+                "train_data_path",
+                "test_data_path"
+            ],
             "title": "OutputModel",
             "type": "object"
         },
@@ -405,16 +321,18 @@
         "output_schema": {
             "properties": {
                 "pca_data_path": {
-                    "default": null,
                     "title": "Pca Data Path",
                     "type": "string"
                 },
                 "pca_model_path": {
-                    "default": null,
                     "title": "Pca Model Path",
                     "type": "string"
                 }
             },
+            "required": [
+                "pca_data_path",
+                "pca_model_path"
+            ],
             "title": "OutputModel",
             "type": "object"
         },
