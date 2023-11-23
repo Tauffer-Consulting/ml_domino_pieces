@@ -8,7 +8,7 @@ class InputModel(BaseModel):
         json_schema_extra={"from_upstream": "always"}
     )
     data_path: str = Field(
-        title="Train Data Path",
+        title="Data Path",
         description="The path to the train data to apply PCA.",
         json_schema_extra={"from_upstream": "always"}
     )

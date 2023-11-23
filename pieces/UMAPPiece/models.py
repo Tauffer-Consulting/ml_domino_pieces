@@ -3,14 +3,14 @@ from pydantic import BaseModel, Field
 
 class InputModel(BaseModel):
     data_path: str = Field(
-        title="Train Data Path",
-        description="The path to the train data to apply PCA.",
+        title="Data Path",
+        description="The path to the data to apply UMAP.",
         json_schema_extra={"from_upstream": "always"}
     )
     n_components: int = Field(
         default=2,
-        description="The number of components for PCA.",
-        title="Number of Components",
+        description="The number of dimensions for UMAP.",
+        title="Number of Dimensions",
     )
     use_class_column: bool = Field(
         default=False,
