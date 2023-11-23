@@ -9,7 +9,8 @@
             "TSNEPiece",
             "PCAInferencePiece",
             "TrainTestSplitPiece",
-            "PCATrainPiece"
+            "PCATrainPiece",
+            "UMAPPiece"
         ],
         "secrets": [],
         "source_image": "ghcr.io/tauffer-consulting/ml-domino-pieces:development-group0"
