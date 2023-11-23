@@ -12,7 +12,7 @@
     "style": {
         "node_label": "UMAP Piece",
         "node_style": {
-            "backgroundColor": "#ed87ec"
+            "backgroundColor": "#ede387"
         },
         "icon_class_name": "radix-icons:dimensions"
     }
