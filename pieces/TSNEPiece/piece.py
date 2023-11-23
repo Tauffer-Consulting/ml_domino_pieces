@@ -29,12 +29,16 @@ class TSNEPiece(BasePiece):
         tsne_df = pd.DataFrame(tsne.embedding_, columns=[f'tsne_{i}' for i in range(input_data.n_components)])
 
         if input_data.n_components >= 2:
-            fig = px.scatter(x=X_tsne[:, 0], y=X_tsne[:, 1], color=df['target'])
+            if input_data.use_class_column:
+                fig = px.scatter(x=X_tsne[:, 0], y=X_tsne[:, 1], color=df['target'])
+            else:
+                fig = px.scatter(x=X_tsne[:, 0], y=X_tsne[:, 1])
             fig.update_layout(
-                title="t-SNE visualization of Custom Classification dataset",
+                title="t-SNE Visualization of Data",
                 xaxis_title="First t-SNE",
                 yaxis_title="Second t-SNE",
             )
+            fig.update_coloraxes(showscale=False)
             json_path = str(Path(self.results_path) / "tsne_figure.json")
             fig.write_json(json_path)
             self.display_result = {
