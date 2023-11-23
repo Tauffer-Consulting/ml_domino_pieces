@@ -20,5 +20,5 @@ class InputModel(BaseModel):
 
 
 class OutputModel(BaseModel):
-    pca_data_path: str = None
-    pca_model_path: str = None
+    pca_data_path: str
+    pca_model_path: str

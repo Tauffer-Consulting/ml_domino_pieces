@@ -1,10 +1,5 @@
 from pydantic import BaseModel, Field
-from typing import List, Optional
-from enum import Enum
 
-class OutputType(str, Enum):
-    file = "file"
-    object = "object"
 
 class InputModel(BaseModel):
     train_data_path: str = Field(
@@ -20,5 +15,5 @@ class InputModel(BaseModel):
 
 
 class OutputModel(BaseModel):
-    train_data_path: str = None
-    test_data_path: str = None
+    train_data_path: str
+    test_data_path: str

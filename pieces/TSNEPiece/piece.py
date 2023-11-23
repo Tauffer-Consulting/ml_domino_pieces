@@ -4,7 +4,7 @@ from sklearn.manifold import TSNE
 import pandas as pd
 from pathlib import Path
 import plotly.express as px
-import pickle as pk
+
 
 class TSNEPiece(BasePiece):
 

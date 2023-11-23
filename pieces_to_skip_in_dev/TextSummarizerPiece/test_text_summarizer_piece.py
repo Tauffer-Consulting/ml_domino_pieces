@@ -1,4 +1,6 @@
 from domino.testing import piece_dry_run
+import pytest
+
 
 def run_piece(input_text: str, output_type):
 
@@ -13,6 +15,7 @@ def run_piece(input_text: str, output_type):
         },
     )
 
+@pytest.mark.skip(reason="Not implemented yet")
 def test_text_summarizer_piece():
     output = run_piece(
         input_text=

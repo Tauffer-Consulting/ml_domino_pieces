@@ -12,9 +12,9 @@ class TrainTestSplitPiece(BasePiece):
         Read data from a file.
         """
         if path.endswith(".csv"):
-            return pd.read_csv(path).to_dict(orient='records')
+            return pd.read_csv(path)
         elif path.endswith(".json"):
-            return pd.read_json(path).to_dict(orient='records')
+            return pd.read_json(path)
         else:
             raise ValueError("File type not supported.")
 
@@ -22,10 +22,8 @@ class TrainTestSplitPiece(BasePiece):
         """
         Split the data into training and test sets.
         """
-        if input_data.data_path is not None:
-            input_data.data = self.read_data_from_file(path=input_data.data_path)
+        df = self.read_data_from_file(path=input_data.data_path)
 
-        df = pd.DataFrame(input_data.data)
         if "target" not in df.columns:
             raise ValueError("Target column not found in data with name 'target'.")
 
@@ -34,9 +32,7 @@ class TrainTestSplitPiece(BasePiece):
         df_train = pd.concat([X_train, y_train], axis=1)
         df_test = pd.concat([X_test, y_test], axis=1)
 
-        if input_data.output_type != 'file':
-            return OutputModel(train_data=df_train.to_dict(orient='records'), test_data=df_test.to_dict(orient='records'))
-        
+
         train_data_path = str(Path(self.results_path) / "train_data.csv")
         test_data_path = str(Path(self.results_path) / "test_data.csv")
 

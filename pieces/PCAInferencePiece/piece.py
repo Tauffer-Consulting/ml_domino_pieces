@@ -1,6 +1,5 @@
 from domino.base_piece import BasePiece
 from .models import InputModel, OutputModel
-from sklearn.decomposition import PCA
 import pandas as pd
 from pathlib import Path
 from plotly.subplots import make_subplots
