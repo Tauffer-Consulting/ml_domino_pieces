@@ -474,9 +474,9 @@
         },
         "output_schema": {
             "properties": {
-                "tsne_data_path": {
+                "umap_data_path": {
                     "default": null,
-                    "title": "Tsne Data Path",
+                    "title": "Umap Data Path",
                     "type": "string"
                 }
             },
