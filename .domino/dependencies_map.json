@@ -6,6 +6,7 @@
         },
         "pieces": [
             "StandardScalerPiece",
+            "PCAInferencePiece",
             "TrainTestSplitPiece",
             "PCATrainPiece"
         ],

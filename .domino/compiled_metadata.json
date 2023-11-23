@@ -33,7 +33,6 @@
                     "type": "string"
                 }
             },
-            "description": "Input data for TextSummarizerPiece",
             "properties": {
                 "train_data": {
                     "anyOf": [
@@ -112,7 +111,6 @@
             "type": "object"
         },
         "output_schema": {
-            "description": "Output data for TextSummarizerPiece",
             "properties": {
                 "train_data": {
                     "anyOf": [
@@ -174,6 +172,72 @@
         },
         "secrets_schema": null,
         "source_url": "https://github.com/Tauffer-Consulting/ml_domino_pieces/tree/main/pieces/StandardScalerPiece"
+    },
+    "PCAInferencePiece": {
+        "name": "PCAInferencePiece",
+        "dependency": {
+            "dockerfile": null,
+            "requirements_file": "requirements_0.txt"
+        },
+        "tags": [
+            "preprocessing",
+            "dimensionality",
+            "reduction"
+        ],
+        "style": {
+            "node_label": "PCA Inference Piece",
+            "node_type": "default",
+            "node_style": {
+                "backgroundColor": "#38b2be"
+            },
+            "useIcon": true,
+            "icon_class_name": "radix-icons:dimensions",
+            "iconStyle": {
+                "cursor": "pointer"
+            }
+        },
+        "description": "Use the trained PCA model to transform the data",
+        "input_schema": {
+            "properties": {
+                "model_path": {
+                    "description": "The path to the PCA model.",
+                    "from_upstream": "always",
+                    "title": "Model Path",
+                    "type": "string"
+                },
+                "data_path": {
+                    "description": "The path to the train data to apply PCA.",
+                    "from_upstream": "always",
+                    "title": "Train Data Path",
+                    "type": "string"
+                },
+                "use_class_column": {
+                    "default": false,
+                    "description": "Whether to use the target column as class to plot.",
+                    "title": "Use Class Column",
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "model_path",
+                "data_path"
+            ],
+            "title": "InputModel",
+            "type": "object"
+        },
+        "output_schema": {
+            "properties": {
+                "pca_data_path": {
+                    "default": null,
+                    "title": "Pca Data Path",
+                    "type": "string"
+                }
+            },
+            "title": "OutputModel",
+            "type": "object"
+        },
+        "secrets_schema": null,
+        "source_url": "https://github.com/Tauffer-Consulting/ml_domino_pieces/tree/main/pieces/PCAInferencePiece"
     },
     "TrainTestSplitPiece": {
         "name": "TrainTestSplitPiece",
@@ -357,10 +421,8 @@
         },
         "description": "Applies PCA to the input data",
         "input_schema": {
-            "description": "Input data for TextSummarizerPiece",
             "properties": {
                 "data_path": {
-                    "default": "",
                     "description": "The path to the train data to apply PCA.",
                     "from_upstream": "always",
                     "title": "Train Data Path",
@@ -379,11 +441,13 @@
                     "type": "boolean"
                 }
             },
+            "required": [
+                "data_path"
+            ],
             "title": "InputModel",
             "type": "object"
         },
         "output_schema": {
-            "description": "Output data for TextSummarizerPiece",
             "properties": {
                 "pca_data_path": {
                     "default": null,
