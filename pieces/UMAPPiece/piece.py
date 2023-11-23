@@ -56,11 +56,11 @@ class UMAPPiece(BasePiece):
                 'file_path': json_path
             }
 
-        tsne_data_path = str(Path(self.results_path) / "tsne_data.csv")
-        tsne_df.to_csv(tsne_data_path, index=False)
+        umap_data_path = str(Path(self.results_path) / "umap_data.csv")
+        df.to_csv(umap_data_path, index=False)
 
         return OutputModel(
-            tsne_data_path=tsne_data_path,
+            umap_data_path=umap_data_path,
         )
 
 

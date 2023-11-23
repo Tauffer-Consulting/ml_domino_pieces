@@ -20,5 +20,5 @@ class InputModel(BaseModel):
 
 
 class OutputModel(BaseModel):
-    tsne_data_path: str = None
+    umap_data_path: str = None
 
