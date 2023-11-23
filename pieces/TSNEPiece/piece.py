@@ -3,8 +3,6 @@ from .models import InputModel, OutputModel
 from sklearn.manifold import TSNE
 import pandas as pd
 from pathlib import Path
-from plotly.subplots import make_subplots
-import plotly.graph_objects as go
 import plotly.express as px
 import pickle as pk
 
@@ -25,14 +23,15 @@ class TSNEPiece(BasePiece):
             raise ValueError("Target column not found in data with name 'target'.")
 
         tsne = TSNE(n_components=input_data.n_components)
-        X_tsne = tsne.fit_transform(df.drop('target', axis=1))
+        tsne.fit(df.drop('target', axis=1))
         tsne_df = pd.DataFrame(tsne.embedding_, columns=[f'tsne_{i}' for i in range(input_data.n_components)])
+        tsne_df['target'] = df['target']
 
         if input_data.n_components >= 2:
             if input_data.use_class_column:
-                fig = px.scatter(x=X_tsne[:, 0], y=X_tsne[:, 1], color=df['target'])
+                fig = px.scatter(tsne_df, x='tsne_0', y='tsne_1', color='target')
             else:
-                fig = px.scatter(x=X_tsne[:, 0], y=X_tsne[:, 1])
+                fig = px.scatter(tsne_df, x='tsne_0', y='tsne_1')
             fig.update_layout(
                 title="t-SNE Visualization of Data",
                 xaxis_title="First t-SNE",
