@@ -7,7 +7,7 @@ from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 import pickle as pk
 
-class PCATrainPiece(BasePiece):
+class PCAInferencePiece(BasePiece):
 
     def read_data_from_file(self, path):
         """
@@ -26,7 +26,7 @@ class PCATrainPiece(BasePiece):
         if "target" not in df.columns or "target" not in df.columns:
             raise ValueError("Target column not found in data with name 'target'.")
 
-        with open(input_data.pca_model_path, "rb") as f:
+        with open(input_data.model_path, "rb") as f:
             pca = pk.load(f)
 
         pca_df = pd.DataFrame(pca.transform(df.drop('target', axis=1)), columns=[f"pca_{i}" for i in range(pca.n_components)])
