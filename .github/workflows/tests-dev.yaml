@@ -45,7 +45,7 @@ jobs:
       # Remember to pass any necessary secrets as env vars here
       # - name: Run tests over built images
       #   env:
-      #     PIECE_SECRET_1: ${{ secrets.PIECE_SECRET_1 }}
+      #     DOMINO_TESTS_ENVIRONMENT: github
       #   run: |
       #     pytest --cov=pieces --cov-report=xml --cov-report=term-missing
 
