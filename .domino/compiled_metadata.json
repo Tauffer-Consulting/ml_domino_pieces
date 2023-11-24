@@ -79,13 +79,13 @@
         },
         "output_schema": {
             "properties": {
-                "model_path": {
-                    "title": "Model Path",
+                "random_forest_model_path": {
+                    "title": "Random Forest Model Path",
                     "type": "string"
                 }
             },
             "required": [
-                "model_path"
+                "random_forest_model_path"
             ],
             "title": "OutputModel",
             "type": "object"
