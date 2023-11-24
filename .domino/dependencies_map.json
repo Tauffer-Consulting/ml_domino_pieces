@@ -5,6 +5,7 @@
             "requirements_file": "requirements_0.txt"
         },
         "pieces": [
+            "TrainRandomForestClassifierPiece",
             "StandardScalerPiece",
             "TSNEPiece",
             "PCAInferencePiece",
