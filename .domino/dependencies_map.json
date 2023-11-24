@@ -11,7 +11,8 @@
             "PCAInferencePiece",
             "TrainTestSplitPiece",
             "PCATrainPiece",
-            "UMAPPiece"
+            "UMAPPiece",
+            "InferenceModelPiece"
         ],
         "secrets": [],
         "source_image": "ghcr.io/tauffer-consulting/ml-domino-pieces:development-group0"

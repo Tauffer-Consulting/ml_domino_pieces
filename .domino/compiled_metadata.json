@@ -497,5 +497,66 @@
         },
         "secrets_schema": null,
         "source_url": "https://github.com/Tauffer-Consulting/ml_domino_pieces/tree/main/pieces/UMAPPiece"
+    },
+    "InferenceModelPiece": {
+        "name": "InferenceModelPiece",
+        "dependency": {
+            "dockerfile": null,
+            "requirements_file": "requirements_0.txt"
+        },
+        "tags": [
+            "modeling",
+            "machine_learning"
+        ],
+        "style": {
+            "node_label": "Inference Model Piece",
+            "node_type": "default",
+            "node_style": {
+                "backgroundColor": "#38b2be"
+            },
+            "useIcon": true,
+            "icon_class_name": "carbon:machine-learning-model",
+            "iconStyle": {
+                "cursor": "pointer"
+            }
+        },
+        "description": "Load a trained model and use it to make predictions on new data.",
+        "input_schema": {
+            "properties": {
+                "data_path": {
+                    "description": "Data path to inference on.",
+                    "from_upstream": "always",
+                    "title": "Data path",
+                    "type": "string"
+                },
+                "model_path": {
+                    "description": "Path to the model to use for inference.",
+                    "from_upstream": "always",
+                    "title": "Model path",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "data_path",
+                "model_path"
+            ],
+            "title": "InputModel",
+            "type": "object"
+        },
+        "output_schema": {
+            "properties": {
+                "data_path": {
+                    "title": "Data Path",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "data_path"
+            ],
+            "title": "OutputModel",
+            "type": "object"
+        },
+        "secrets_schema": null,
+        "source_url": "https://github.com/Tauffer-Consulting/ml_domino_pieces/tree/main/pieces/InferenceModelPiece"
     }
 }
