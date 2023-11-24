@@ -35,4 +35,4 @@ class InputModel(BaseModel):
 
 
 class OutputModel(BaseModel):
-    model_path: str
+    random_forest_model_path: str

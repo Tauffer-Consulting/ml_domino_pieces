@@ -31,11 +31,11 @@ class TrainRandomForestClassifierPiece(BasePiece):
             criterion=input_data.criterion,
             max_depth=input_data.max_depth,
         )
-        model.fit(x=train_data.drop(columns=["target"]), y=train_data["target"])
+        model.fit(train_data.drop(columns=["target"], axis=1), train_data["target"])
 
         feature_imp = pd.Series(
             model.feature_importances_,
-            index=train_data.drop('target').columns
+            index=train_data.drop('target', axis=1).columns
         ).sort_values(ascending=True)
 
         fig = px.bar(x=feature_imp.values, y=feature_imp.index, orientation='h')
@@ -56,13 +56,11 @@ class TrainRandomForestClassifierPiece(BasePiece):
             'file_path': fig_path
         }
 
-        # Save model
-        model_path = Path(self.piece_config["model_path"])
-        model_path.parent.mkdir(parents=True, exist_ok=True)
+        model_path = str(Path(self.results_path) / "random_forest_model.pkl")
         with open(model_path, "wb") as f:
             pk.dump(model, f)
 
-        return OutputModel(model_path=str(model_path))
+        return OutputModel(random_forest_model_path=str(model_path))
 
 
 
