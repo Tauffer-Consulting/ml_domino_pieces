@@ -1,0 +1,18 @@
+{
+    "name": "InferenceModelPiece",
+    "description": "Load a trained model and use it to make predictions on new data.",
+    "dependency": {
+        "requirements_file": "requirements_0.txt"
+    },
+    "tags": [
+        "modeling",
+        "machine_learning"
+    ],
+    "style": {
+        "node_label": "Inference Model Piece",
+        "node_style": {
+            "backgroundColor": "#38b2be"
+        },
+        "icon_class_name": "carbon:machine-learning-model"
+    }
+}
