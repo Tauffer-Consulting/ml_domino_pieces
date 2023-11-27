@@ -1,0 +1,19 @@
+{
+    "name": "OpenCVFilterPiece",
+    "description": "Piece that uses OpenCV filter on an Image",
+    "dependency": {
+        "dockerfile": "Dockerfile_opencv"
+    },
+    "tags": [
+        "image",
+        "processing",
+        "filter"
+    ],
+    "style": {
+        "node_label": "OpenCV Filter Piece",
+        "node_style": {
+            "backgroundColor": "#38b2be"
+        },
+        "icon_class_name": "material-symbols:image-outline"
+    }
+}
