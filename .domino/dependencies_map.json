@@ -15,7 +15,7 @@
             "InferenceModelPiece"
         ],
         "secrets": [],
-        "source_image": "ghcr.io/tauffer-consulting/ml-domino-pieces:development-group0"
+        "source_image": "ghcr.io/tauffer-consulting/ml-domino-pieces:0.2.0-group0"
     },
     "group1": {
         "dependency": {
@@ -26,6 +26,6 @@
             "OpenCVFilterPiece"
         ],
         "secrets": [],
-        "source_image": "ghcr.io/tauffer-consulting/ml-domino-pieces:development-group1"
+        "source_image": "ghcr.io/tauffer-consulting/ml-domino-pieces:0.2.0-group1"
     }
 }
