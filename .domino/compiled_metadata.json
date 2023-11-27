@@ -498,6 +498,82 @@
         "secrets_schema": null,
         "source_url": "https://github.com/Tauffer-Consulting/ml_domino_pieces/tree/main/pieces/UMAPPiece"
     },
+    "OpenCVFilterPiece": {
+        "name": "OpenCVFilterPiece",
+        "dependency": {
+            "dockerfile": "Dockerfile_opencv",
+            "requirements_file": null
+        },
+        "tags": [
+            "image",
+            "processing",
+            "filter"
+        ],
+        "style": {
+            "node_label": "OpenCV Filter Piece",
+            "node_type": "default",
+            "node_style": {
+                "backgroundColor": "#38b2be"
+            },
+            "useIcon": true,
+            "icon_class_name": "material-symbols:image-outline",
+            "iconStyle": {
+                "cursor": "pointer"
+            }
+        },
+        "description": "Piece that uses OpenCV filter on an Image",
+        "input_schema": {
+            "$defs": {
+                "FilterNaem": {
+                    "enum": [
+                        "canny",
+                        "binary"
+                    ],
+                    "title": "FilterNaem",
+                    "type": "string"
+                }
+            },
+            "properties": {
+                "image_path": {
+                    "description": "The path to the image to apply filter.",
+                    "from_upstream": "always",
+                    "title": "Image Path",
+                    "type": "string"
+                },
+                "filter_name": {
+                    "allOf": [
+                        {
+                            "$ref": "#/$defs/FilterNaem"
+                        }
+                    ],
+                    "default": "canny",
+                    "description": "The name of the filter to apply.",
+                    "title": "Filter Name"
+                }
+            },
+            "required": [
+                "image_path"
+            ],
+            "title": "InputModel",
+            "type": "object"
+        },
+        "output_schema": {
+            "properties": {
+                "image_path": {
+                    "description": "The path to the image with the filter applied.",
+                    "title": "Output image Path",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "image_path"
+            ],
+            "title": "OutputModel",
+            "type": "object"
+        },
+        "secrets_schema": null,
+        "source_url": "https://github.com/Tauffer-Consulting/ml_domino_pieces/tree/main/pieces/OpenCVFilterPiece"
+    },
     "InferenceModelPiece": {
         "name": "InferenceModelPiece",
         "dependency": {
