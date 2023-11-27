@@ -1,10 +1,7 @@
 from domino.base_piece import BasePiece
 from .models import InputModel, OutputModel
-import pandas as pd
 from pathlib import Path
-from plotly.subplots import make_subplots
 import cv2
-from pathlib import Path
 
 
 class OpenCVFilterPiece(BasePiece):
