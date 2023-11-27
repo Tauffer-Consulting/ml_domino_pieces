@@ -1,15 +1,11 @@
 # Use the base image
 FROM ghcr.io/tauffer-consulting/domino-base-piece:latest
 
-# Update package lists and install necessary dependencies
 RUN apt-get update && \
     apt-get install -y \
     python3-dev \
     python3-pip \
     libopencv-dev
 
-# Install OpenCV using pip (Python package manager)
 RUN pip3 install opencv-python-headless
 
-# Set working directory (optional)
-WORKDIR /app
