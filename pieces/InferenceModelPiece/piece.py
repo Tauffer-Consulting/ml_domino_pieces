@@ -40,10 +40,13 @@ class InferenceModelPiece(BasePiece):
         data['predictions'] = predictions
         data.to_csv(predictions_path, index=False)
 
+        results_path = str(Path(self.results_path) / "predictions.md")
+        data.to_markdown(results_path)
+
         # Plot predictions
         self.display_result = {
             'file_type': 'md',
-            'file_path': predictions_path
+            'file_path': results_path
         }
 
         return OutputModel(data_path=predictions_path)

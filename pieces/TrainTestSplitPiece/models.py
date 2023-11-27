@@ -8,9 +8,9 @@ class InputModel(BaseModel):
         json_schema_extra={"from_upstream": "always"}
     )
     test_data_size: float = Field(
-        default=0.8,
+        default=0.2,
         description="The size (%) of the test data.",
-        title="Test Data Size",
+        title="Test Data Ratio",
     )
     random_state: int = Field(
         default=42,
