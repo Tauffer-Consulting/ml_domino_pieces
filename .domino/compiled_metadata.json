@@ -1,237 +1,562 @@
 {
-    "WhisperPiece": {
-        "name": "WhisperPiece",
+    "TrainRandomForestClassifierPiece": {
+        "name": "TrainRandomForestClassifierPiece",
         "dependency": {
-            "dockerfile": "Dockerfile_whisper",
-            "requirements_file": null
+            "dockerfile": null,
+            "requirements_file": "requirements_0.txt"
         },
-        "tags": [],
+        "tags": [
+            "modeling",
+            "machine_learning"
+        ],
         "style": {
-            "node_label": "Wisper Piece",
+            "node_label": "Train Random Forest Classifier Piece",
             "node_type": "default",
             "node_style": {
-                "backgroundColor": "#ebebeb"
+                "backgroundColor": "#38b2be"
             },
             "useIcon": true,
-            "icon_class_name": "fa-solid:comment-dots",
+            "icon_class_name": "carbon:machine-learning-model",
             "iconStyle": {
                 "cursor": "pointer"
             }
         },
-        "description": "Whisper is a general-purpose speech recognition model. Ref: https://github.com/openai/whisper",
-        "container_resources": {
-            "use_gpu": true,
-            "requests": {
-                "cpu": "1000m",
-                "memory": "3Gi"
-            },
-            "limits": {
-                "cpu": "5000m",
-                "memory": "15Gi"
-            }
-        },
+        "description": "Train a Random Forest Classifier model over the input data.",
         "input_schema": {
-            "title": "InputModel",
-            "description": "Input data for WhisperPiece",
-            "type": "object",
+            "$defs": {
+                "Criterion": {
+                    "enum": [
+                        "gini",
+                        "entropy",
+                        "log_loss"
+                    ],
+                    "title": "Criterion",
+                    "type": "string"
+                }
+            },
             "properties": {
-                "file_path": {
-                    "title": "File Path",
-                    "description": "The path to the text file to process.",
+                "train_data_path": {
+                    "description": "The path to the train data to train the data.",
+                    "from_upstream": "always",
+                    "title": "Train Data Path",
                     "type": "string"
                 },
-                "model_size": {
-                    "description": "The size of the model to use.",
-                    "default": "base",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/ModelSizeType"
-                        }
-                    ]
+                "n_estimators": {
+                    "default": 100,
+                    "description": "The number of trees in the forest.",
+                    "title": "Number of Estimators",
+                    "type": "integer"
                 },
-                "output_type": {
-                    "description": "The type of output fot the result text.",
-                    "default": "xcom",
+                "criterion": {
                     "allOf": [
                         {
-                            "$ref": "#/definitions/OutputTypeType"
+                            "$ref": "#/$defs/Criterion"
                         }
-                    ]
+                    ],
+                    "default": "gini",
+                    "description": "The function to measure the quality of a split.",
+                    "title": "Criterion"
+                },
+                "max_depth": {
+                    "anyOf": [
+                        {
+                            "type": "integer"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "description": "The maximum depth of the tree.",
+                    "title": "Max Depth"
                 }
             },
             "required": [
-                "file_path"
+                "train_data_path"
             ],
-            "definitions": {
-                "ModelSizeType": {
-                    "title": "ModelSizeType",
-                    "description": "An enumeration.",
-                    "enum": [
-                        "tiny",
-                        "base",
-                        "small",
-                        "medium",
-                        "large"
-                    ],
-                    "type": "string"
-                },
-                "OutputTypeType": {
-                    "title": "OutputTypeType",
-                    "description": "An enumeration.",
-                    "enum": [
-                        "xcom",
-                        "file"
-                    ],
-                    "type": "string"
-                }
-            }
+            "title": "InputModel",
+            "type": "object"
         },
         "output_schema": {
-            "title": "OutputModel",
-            "description": "Output data for WhisperPiece",
-            "type": "object",
             "properties": {
-                "message": {
-                    "title": "Message",
-                    "description": "Output message to log.",
-                    "default": "",
+                "random_forest_model_path": {
+                    "title": "Random Forest Model Path",
                     "type": "string"
-                },
-                "transcription_result": {
-                    "title": "Transcription Result",
-                    "description": "The result transcription text.",
-                    "default": "",
-                    "type": "string"
-                },
-                "file_path": {
-                    "title": "File Path",
-                    "description": "The path to the results text file.",
-                    "default": "",
-                    "anyOf": [
-                        {
-                            "type": "string",
-                            "format": "file-path"
-                        },
-                        {
-                            "type": "string"
-                        }
-                    ]
                 }
-            }
+            },
+            "required": [
+                "random_forest_model_path"
+            ],
+            "title": "OutputModel",
+            "type": "object"
         },
         "secrets_schema": null,
-        "source_url": "Tauffer-Consulting/ml_domino_pieces/tree/main/pieces/WhisperPiece"
+        "source_url": "https://github.com/Tauffer-Consulting/ml_domino_pieces/tree/main/pieces/TrainRandomForestClassifierPiece"
     },
-    "TextSummarizerPiece": {
-        "name": "TextSummarizerPiece",
+    "StandardScalerPiece": {
+        "name": "StandardScalerPiece",
         "dependency": {
-            "dockerfile": "Dockerfile_summarizer",
-            "requirements_file": null
+            "dockerfile": null,
+            "requirements_file": "requirements_0.txt"
         },
-        "tags": [],
+        "tags": [
+            "preprocessing",
+            "scaler"
+        ],
         "style": {
-            "node_label": "Text Summarizer Piece",
+            "node_label": "Standard Scaler",
             "node_type": "default",
             "node_style": {
-                "backgroundColor": "#ebebeb"
+                "backgroundColor": "#b3cde8"
             },
             "useIcon": true,
-            "icon_class_name": "fa-solid:quote-left",
+            "icon_class_name": "icon-park-outline:split",
             "iconStyle": {
                 "cursor": "pointer"
             }
         },
-        "description": "Text summarizer Piece",
-        "container_resources": {
-            "use_gpu": true,
-            "requests": {
-                "cpu": "1000m",
-                "memory": "3Gi"
+        "description": "Apply StandardScaler to the data",
+        "input_schema": {
+            "properties": {
+                "train_data_path": {
+                    "description": "The path to the train data to be scaled.",
+                    "from_upstream": "always",
+                    "title": "Train Data Path",
+                    "type": "string"
+                },
+                "test_data_path": {
+                    "description": "The path to the test data to be scaled.",
+                    "from_upstream": "always",
+                    "title": "Test Data Path",
+                    "type": "string"
+                }
             },
-            "limits": {
-                "cpu": "5000m",
-                "memory": "15Gi"
+            "required": [
+                "train_data_path",
+                "test_data_path"
+            ],
+            "title": "InputModel",
+            "type": "object"
+        },
+        "output_schema": {
+            "properties": {
+                "train_data_path": {
+                    "title": "Train Data Path",
+                    "type": "string"
+                },
+                "test_data_path": {
+                    "title": "Test Data Path",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "train_data_path",
+                "test_data_path"
+            ],
+            "title": "OutputModel",
+            "type": "object"
+        },
+        "secrets_schema": null,
+        "source_url": "https://github.com/Tauffer-Consulting/ml_domino_pieces/tree/main/pieces/StandardScalerPiece"
+    },
+    "TSNEPiece": {
+        "name": "TSNEPiece",
+        "dependency": {
+            "dockerfile": null,
+            "requirements_file": "requirements_0.txt"
+        },
+        "tags": [
+            "preprocessing",
+            "dimensionality",
+            "reduction"
+        ],
+        "style": {
+            "node_label": "t-SNE Piece",
+            "node_type": "default",
+            "node_style": {
+                "backgroundColor": "#38b2be"
+            },
+            "useIcon": true,
+            "icon_class_name": "radix-icons:dimensions",
+            "iconStyle": {
+                "cursor": "pointer"
             }
         },
+        "description": "Applies t-SNE to the data",
         "input_schema": {
-            "title": "InputModel",
-            "description": "Input data for TextSummarizerPiece",
-            "type": "object",
             "properties": {
-                "input_file_path": {
-                    "title": "Input File Path",
-                    "description": "The path to the text file to summarize.",
-                    "default": "",
+                "data_path": {
+                    "description": "The path to data to apply t-SNE.",
+                    "from_upstream": "always",
+                    "title": "Data Path",
                     "type": "string"
                 },
-                "input_text": {
-                    "title": "Input Text",
-                    "description": "The text to summarize.",
-                    "default": "",
-                    "type": "string"
+                "n_components": {
+                    "default": 2,
+                    "description": "The number of dimensions t-SNE.",
+                    "title": "Number of Dimensions",
+                    "type": "integer"
                 },
-                "output_type": {
-                    "description": "The type of output fot the result text.",
-                    "default": "xcom",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/OutputTypeType"
-                        }
-                    ]
-                },
-                "use_gpu": {
-                    "title": "Use Gpu",
-                    "description": "Use GPU for inference.",
+                "use_class_column": {
                     "default": false,
+                    "description": "Whether to use the target column as class to plot.",
+                    "title": "Use Class Column",
                     "type": "boolean"
                 }
             },
-            "definitions": {
-                "OutputTypeType": {
-                    "title": "OutputTypeType",
-                    "description": "An enumeration.",
-                    "enum": [
-                        "xcom",
-                        "file"
-                    ],
-                    "type": "string"
-                }
-            }
+            "required": [
+                "data_path"
+            ],
+            "title": "InputModel",
+            "type": "object"
         },
         "output_schema": {
-            "title": "OutputModel",
-            "description": "Output data for TextSummarizerPiece",
-            "type": "object",
             "properties": {
-                "message": {
-                    "title": "Message",
-                    "description": "Output message to log.",
-                    "default": "",
+                "tsne_data_path": {
+                    "default": null,
+                    "title": "Tsne Data Path",
                     "type": "string"
-                },
-                "summary_result": {
-                    "title": "Summary Result",
-                    "description": "The result summarized text.",
-                    "default": "",
-                    "type": "string"
-                },
-                "file_path": {
-                    "title": "File Path",
-                    "description": "The path to the resulting summarized text file.",
-                    "default": "",
-                    "anyOf": [
-                        {
-                            "type": "string",
-                            "format": "file-path"
-                        },
-                        {
-                            "type": "string"
-                        }
-                    ]
                 }
-            }
+            },
+            "title": "OutputModel",
+            "type": "object"
         },
         "secrets_schema": null,
-        "source_url": "Tauffer-Consulting/ml_domino_pieces/tree/main/pieces/TextSummarizerPiece"
+        "source_url": "https://github.com/Tauffer-Consulting/ml_domino_pieces/tree/main/pieces/TSNEPiece"
+    },
+    "PCAInferencePiece": {
+        "name": "PCAInferencePiece",
+        "dependency": {
+            "dockerfile": null,
+            "requirements_file": "requirements_0.txt"
+        },
+        "tags": [
+            "preprocessing",
+            "dimensionality",
+            "reduction"
+        ],
+        "style": {
+            "node_label": "PCA Inference Piece",
+            "node_type": "default",
+            "node_style": {
+                "backgroundColor": "#38b2be"
+            },
+            "useIcon": true,
+            "icon_class_name": "radix-icons:dimensions",
+            "iconStyle": {
+                "cursor": "pointer"
+            }
+        },
+        "description": "Use the trained PCA model to transform the data",
+        "input_schema": {
+            "properties": {
+                "model_path": {
+                    "description": "The path to the PCA model.",
+                    "from_upstream": "always",
+                    "title": "Model Path",
+                    "type": "string"
+                },
+                "data_path": {
+                    "description": "The path to the train data to apply PCA.",
+                    "from_upstream": "always",
+                    "title": "Data Path",
+                    "type": "string"
+                },
+                "use_class_column": {
+                    "default": false,
+                    "description": "Whether to use the target column as class to plot.",
+                    "title": "Use Class Column",
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "model_path",
+                "data_path"
+            ],
+            "title": "InputModel",
+            "type": "object"
+        },
+        "output_schema": {
+            "properties": {
+                "pca_data_path": {
+                    "default": null,
+                    "title": "Pca Data Path",
+                    "type": "string"
+                }
+            },
+            "title": "OutputModel",
+            "type": "object"
+        },
+        "secrets_schema": null,
+        "source_url": "https://github.com/Tauffer-Consulting/ml_domino_pieces/tree/main/pieces/PCAInferencePiece"
+    },
+    "TrainTestSplitPiece": {
+        "name": "TrainTestSplitPiece",
+        "dependency": {
+            "dockerfile": null,
+            "requirements_file": "requirements_0.txt"
+        },
+        "tags": [
+            "preprocessing",
+            "datasets"
+        ],
+        "style": {
+            "node_label": "Split Data",
+            "node_type": "default",
+            "node_style": {
+                "backgroundColor": "#b3cde8"
+            },
+            "useIcon": true,
+            "icon_class_name": "icon-park-outline:split",
+            "iconStyle": {
+                "cursor": "pointer"
+            }
+        },
+        "description": "Split data into train and test sets",
+        "input_schema": {
+            "properties": {
+                "data_path": {
+                    "description": "The path to the data to be split.",
+                    "from_upstream": "always",
+                    "title": "Data Path",
+                    "type": "string"
+                },
+                "test_data_size": {
+                    "default": 0.2,
+                    "description": "The size (%) of the test data.",
+                    "title": "Test Data Ratio",
+                    "type": "number"
+                },
+                "random_state": {
+                    "default": 42,
+                    "description": "The random state for the split.",
+                    "title": "Random State",
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "data_path"
+            ],
+            "title": "InputModel",
+            "type": "object"
+        },
+        "output_schema": {
+            "properties": {
+                "train_data_path": {
+                    "title": "Train Data Path",
+                    "type": "string"
+                },
+                "test_data_path": {
+                    "title": "Test Data Path",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "train_data_path",
+                "test_data_path"
+            ],
+            "title": "OutputModel",
+            "type": "object"
+        },
+        "secrets_schema": null,
+        "source_url": "https://github.com/Tauffer-Consulting/ml_domino_pieces/tree/main/pieces/TrainTestSplitPiece"
+    },
+    "PCATrainPiece": {
+        "name": "PCATrainPiece",
+        "dependency": {
+            "dockerfile": null,
+            "requirements_file": "requirements_0.txt"
+        },
+        "tags": [
+            "preprocessing",
+            "dimensionality",
+            "reduction"
+        ],
+        "style": {
+            "node_label": "PCA Train Piece",
+            "node_type": "default",
+            "node_style": {
+                "backgroundColor": "#38b2be"
+            },
+            "useIcon": true,
+            "icon_class_name": "radix-icons:dimensions",
+            "iconStyle": {
+                "cursor": "pointer"
+            }
+        },
+        "description": "Applies PCA to the input data",
+        "input_schema": {
+            "properties": {
+                "data_path": {
+                    "description": "The path to the train data to apply PCA.",
+                    "from_upstream": "always",
+                    "title": "Train Data Path",
+                    "type": "string"
+                },
+                "n_components": {
+                    "default": 2,
+                    "description": "The number of components for PCA.",
+                    "title": "Number of Components",
+                    "type": "integer"
+                },
+                "use_class_column": {
+                    "default": false,
+                    "description": "Whether to use the target column as class to plot.",
+                    "title": "Use Class Column",
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "data_path"
+            ],
+            "title": "InputModel",
+            "type": "object"
+        },
+        "output_schema": {
+            "properties": {
+                "pca_data_path": {
+                    "title": "Pca Data Path",
+                    "type": "string"
+                },
+                "pca_model_path": {
+                    "title": "Pca Model Path",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "pca_data_path",
+                "pca_model_path"
+            ],
+            "title": "OutputModel",
+            "type": "object"
+        },
+        "secrets_schema": null,
+        "source_url": "https://github.com/Tauffer-Consulting/ml_domino_pieces/tree/main/pieces/PCATrainPiece"
+    },
+    "UMAPPiece": {
+        "name": "UMAPPiece",
+        "dependency": {
+            "dockerfile": null,
+            "requirements_file": "requirements_0.txt"
+        },
+        "tags": [
+            "preprocessing",
+            "dimensionality",
+            "reduction"
+        ],
+        "style": {
+            "node_label": "UMAP Piece",
+            "node_type": "default",
+            "node_style": {
+                "backgroundColor": "#38b2be"
+            },
+            "useIcon": true,
+            "icon_class_name": "radix-icons:dimensions",
+            "iconStyle": {
+                "cursor": "pointer"
+            }
+        },
+        "description": "Applies t-SNE to the data",
+        "input_schema": {
+            "properties": {
+                "data_path": {
+                    "description": "The path to the data to apply UMAP.",
+                    "from_upstream": "always",
+                    "title": "Data Path",
+                    "type": "string"
+                },
+                "n_components": {
+                    "default": 2,
+                    "description": "The number of dimensions for UMAP.",
+                    "title": "Number of Dimensions",
+                    "type": "integer"
+                },
+                "use_class_column": {
+                    "default": false,
+                    "description": "Whether to use the target column as class to plot.",
+                    "title": "Use Class Column",
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "data_path"
+            ],
+            "title": "InputModel",
+            "type": "object"
+        },
+        "output_schema": {
+            "properties": {
+                "umap_data_path": {
+                    "default": null,
+                    "title": "Umap Data Path",
+                    "type": "string"
+                }
+            },
+            "title": "OutputModel",
+            "type": "object"
+        },
+        "secrets_schema": null,
+        "source_url": "https://github.com/Tauffer-Consulting/ml_domino_pieces/tree/main/pieces/UMAPPiece"
+    },
+    "InferenceModelPiece": {
+        "name": "InferenceModelPiece",
+        "dependency": {
+            "dockerfile": null,
+            "requirements_file": "requirements_0.txt"
+        },
+        "tags": [
+            "modeling",
+            "machine_learning"
+        ],
+        "style": {
+            "node_label": "Inference Model Piece",
+            "node_type": "default",
+            "node_style": {
+                "backgroundColor": "#38b2be"
+            },
+            "useIcon": true,
+            "icon_class_name": "carbon:machine-learning-model",
+            "iconStyle": {
+                "cursor": "pointer"
+            }
+        },
+        "description": "Load a trained model and use it to make predictions on new data.",
+        "input_schema": {
+            "properties": {
+                "data_path": {
+                    "description": "Data path to inference on.",
+                    "from_upstream": "always",
+                    "title": "Data path",
+                    "type": "string"
+                },
+                "model_path": {
+                    "description": "Path to the model to use for inference.",
+                    "from_upstream": "always",
+                    "title": "Model path",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "data_path",
+                "model_path"
+            ],
+            "title": "InputModel",
+            "type": "object"
+        },
+        "output_schema": {
+            "properties": {
+                "data_path": {
+                    "title": "Data Path",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "data_path"
+            ],
+            "title": "OutputModel",
+            "type": "object"
+        },
+        "secrets_schema": null,
+        "source_url": "https://github.com/Tauffer-Consulting/ml_domino_pieces/tree/main/pieces/InferenceModelPiece"
     }
 }

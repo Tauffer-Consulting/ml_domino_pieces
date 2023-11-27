@@ -1,0 +1,18 @@
+{
+    "name": "TrainTestSplitPiece",
+    "description": "Split data into train and test sets",
+    "dependency": {
+        "requirements_file": "requirements_0.txt"
+    },
+    "tags": [
+        "preprocessing",
+        "datasets"
+    ],
+    "style": {
+        "node_label": "Split Data",
+        "node_style": {
+            "backgroundColor": "#b3cde8"
+        },
+        "icon_class_name": "icon-park-outline:split"
+    }
+}

@@ -1,0 +1,19 @@
+{
+    "name": "UMAPPiece",
+    "description": "Applies t-SNE to the data",
+    "dependency": {
+        "requirements_file": "requirements_0.txt"
+    },
+    "tags": [
+        "preprocessing",
+        "dimensionality",
+        "reduction"
+    ],
+    "style": {
+        "node_label": "UMAP Piece",
+        "node_style": {
+            "backgroundColor": "#38b2be"
+        },
+        "icon_class_name": "radix-icons:dimensions"
+    }
+}
