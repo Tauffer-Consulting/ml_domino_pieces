@@ -34,19 +34,19 @@ class TSNEPiece(BasePiece):
             if input_data.use_class_column:
                 unique_targets = tsne_df['target'].unique()
                 for idx, target_value in enumerate(unique_targets):
-                        color = color_scale[idx % len(color_scale)]
-                        filtered_data = tsne_df[tsne_df['target'] == target_value]
-                        fig.add_trace(
-                            go.Scatter(
-                                x=filtered_data['tsne_0'],
-                                y=filtered_data['tsne_1'],
-                                mode='markers',
-                                name=f'Target: {target_value}',
-                                marker=dict(
-                                    color=color,
-                                ),
-                            )
+                    color = color_scale[idx % len(color_scale)]
+                    filtered_data = tsne_df[tsne_df['target'] == target_value]
+                    fig.add_trace(
+                        go.Scatter(
+                            x=filtered_data['tsne_0'],
+                            y=filtered_data['tsne_1'],
+                            mode='markers',
+                            name=f'Target: {target_value}',
+                            marker=dict(
+                                color=color,
+                            ),
                         )
+                    )
             else:
                 color = color_scale[0]
                 fig.add_trace(
