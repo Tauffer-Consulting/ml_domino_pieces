@@ -1,6 +1,7 @@
 from domino.testing import piece_dry_run, skip_envs
 import pandas as pd
 
+
 @skip_envs("github")
 def test_standard_scaler_piece():
     input_data = dict(
