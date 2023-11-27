@@ -3,7 +3,6 @@ from .models import InputModel, OutputModel
 from umap import UMAP
 import pandas as pd
 from pathlib import Path
-from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 import plotly.express as px
 
@@ -32,24 +31,33 @@ class UMAPPiece(BasePiece):
         df['Second Dimension'] = umap_proj[:, 1]
 
         if input_data.n_components >= 2:
+            fig = go.Figure()
+            color_scale = px.colors.qualitative.Bold
             if input_data.use_class_column:
-                fig = px.scatter(
-                    df,
-                    x='First Dimension',
-                    y='Second Dimension',
-                    color='target',
-                    title='UMAP Projection - First two dimensions',
-                )
-                fig.update_coloraxes(showscale=False)
+                unique_targets = df['target'].unique()
+                for idx, target_value in enumerate(unique_targets):
+                    color = color_scale[idx % len(color_scale)]
+                    filtered_data = df[df['target'] == target_value]
+                    fig.add_trace(
+                        go.Scatter(
+                            x=filtered_data['First Dimension'],
+                            y=filtered_data['Second Dimension'],
+                            mode='markers',
+                            name=f'Target: {target_value}',
+                            marker=dict(
+                                color=color,
+                            ),
+                        )
+                    )
             else:
-                fig = px.scatter(
-                    df,
-                    x='First Dimension',
-                    y='Second Dimension',
-                    title='UMAP Projection - First two dimensions',
+                fig.add_trace(
+                    go.Scatter(
+                        x=df['First Dimension'],
+                        y=df['Second Dimension'],
+                        mode='markers',
+                    )
                 )
-                fig.update_coloraxes(showscale=False)
-
+            fig.update_coloraxes(showscale=False)
             fig.update_layout(
                 title="UMAP Projection - First two dimensions",
                 xaxis_title="First Dimension",
