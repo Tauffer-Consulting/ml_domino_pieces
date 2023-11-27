@@ -322,9 +322,9 @@
                     "type": "string"
                 },
                 "test_data_size": {
-                    "default": 0.8,
+                    "default": 0.2,
                     "description": "The size (%) of the test data.",
-                    "title": "Test Data Size",
+                    "title": "Test Data Ratio",
                     "type": "number"
                 },
                 "random_state": {
