@@ -457,6 +457,16 @@
             }
         },
         "description": "Applies t-SNE to the data",
+        "container_resources": {
+            "requests": {
+                "cpu": "1000m",
+                "memory": "1024Mi"
+            },
+            "limits": {
+                "cpu": "1000m",
+                "memory": "1024Mi"
+            }
+        },
         "input_schema": {
             "properties": {
                 "data_path": {
