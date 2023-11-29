@@ -9,6 +9,16 @@
         "dimensionality",
         "reduction"
     ],
+    "container_resources": {
+        "requests": {
+            "cpu": "1000m",
+            "memory": "1024Mi"
+        },
+        "limits": {
+            "cpu": "1000m",
+            "memory": "1024Mi"
+        }
+    },
     "style": {
         "node_label": "UMAP Piece",
         "node_style": {
