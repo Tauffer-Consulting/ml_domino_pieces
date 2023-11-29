@@ -459,12 +459,12 @@
         "description": "Applies t-SNE to the data",
         "container_resources": {
             "requests": {
-                "cpu": "1000m",
-                "memory": "1024Mi"
+                "cpu": 1000,
+                "memory": 1024
             },
             "limits": {
-                "cpu": "1000m",
-                "memory": "1024Mi"
+                "cpu": 1000,
+                "memory": 1024
             }
         },
         "input_schema": {
