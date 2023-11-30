@@ -1,4 +1,5 @@
-from domino.testing import piece_dry_run, skip_envs
+from domino.testing import piece_dry_run
+from domino.testing.utils import skip_envs
 import pandas as pd
 
 @skip_envs("github")
