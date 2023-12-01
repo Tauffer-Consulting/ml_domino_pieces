@@ -1,6 +1,10 @@
 # Use the base image
 FROM ghcr.io/tauffer-consulting/domino-base-piece:latest
 
+COPY config.toml domino/pieces_repository/
+COPY pieces domino/pieces_repository/pieces
+COPY .domino domino/pieces_repository/.domino
+
 RUN apt-get update && \
     apt-get install -y \
     python3-dev \

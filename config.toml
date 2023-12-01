@@ -10,4 +10,3 @@ REPOSITORY_LABEL = "ML Pieces Repository"
 # The version of this Pieces release
 # Attention: changing this will create a new release
 VERSION = "0.2.1"
-
