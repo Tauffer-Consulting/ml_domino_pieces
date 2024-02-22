@@ -5,17 +5,17 @@
             "requirements_file": "requirements_0.txt"
         },
         "pieces": [
-            "TrainRandomForestClassifierPiece",
             "StandardScalerPiece",
-            "TSNEPiece",
             "PCAInferencePiece",
-            "TrainTestSplitPiece",
             "PCATrainPiece",
             "UMAPPiece",
-            "InferenceModelPiece"
+            "InferenceModelPiece",
+            "TrainRandomForestClassifierPiece",
+            "TrainTestSplitPiece",
+            "TSNEPiece"
         ],
         "secrets": [],
-        "source_image": "ghcr.io/tauffer-consulting/ml-domino-pieces:0.2.1-group0"
+        "source_image": "ghcr.io/tauffer-consulting/ml-domino-pieces:0.2.2-group0"
     },
     "group1": {
         "dependency": {
@@ -26,6 +26,6 @@
             "OpenCVFilterPiece"
         ],
         "secrets": [],
-        "source_image": "ghcr.io/tauffer-consulting/ml-domino-pieces:0.2.1-group1"
+        "source_image": "ghcr.io/tauffer-consulting/ml-domino-pieces:0.2.2-group1"
     }
 }

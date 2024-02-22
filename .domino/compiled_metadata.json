@@ -1,4 +1,420 @@
 {
+    "StandardScalerPiece": {
+        "name": "StandardScalerPiece",
+        "dependency": {
+            "dockerfile": null,
+            "requirements_file": "requirements_0.txt"
+        },
+        "tags": [
+            "preprocessing",
+            "scaler"
+        ],
+        "style": {
+            "node_label": "Standard Scaler",
+            "node_type": "default",
+            "node_style": {
+                "backgroundColor": "#b3cde8"
+            },
+            "useIcon": true,
+            "icon_class_name": "icon-park-outline:split",
+            "iconStyle": {
+                "cursor": "pointer"
+            }
+        },
+        "description": "Apply StandardScaler to the data",
+        "input_schema": {
+            "properties": {
+                "train_data_path": {
+                    "description": "The path to the train data to be scaled.",
+                    "from_upstream": "always",
+                    "title": "Train Data Path",
+                    "type": "string"
+                },
+                "test_data_path": {
+                    "description": "The path to the test data to be scaled.",
+                    "from_upstream": "always",
+                    "title": "Test Data Path",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "train_data_path",
+                "test_data_path"
+            ],
+            "title": "InputModel",
+            "type": "object"
+        },
+        "output_schema": {
+            "properties": {
+                "train_data_path": {
+                    "title": "Train Data Path",
+                    "type": "string"
+                },
+                "test_data_path": {
+                    "title": "Test Data Path",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "train_data_path",
+                "test_data_path"
+            ],
+            "title": "OutputModel",
+            "type": "object"
+        },
+        "secrets_schema": null,
+        "source_url": "https://github.com/Tauffer-Consulting/ml_domino_pieces/tree/main/pieces/StandardScalerPiece"
+    },
+    "PCAInferencePiece": {
+        "name": "PCAInferencePiece",
+        "dependency": {
+            "dockerfile": null,
+            "requirements_file": "requirements_0.txt"
+        },
+        "tags": [
+            "preprocessing",
+            "dimensionality",
+            "reduction"
+        ],
+        "style": {
+            "node_label": "PCA Inference Piece",
+            "node_type": "default",
+            "node_style": {
+                "backgroundColor": "#38b2be"
+            },
+            "useIcon": true,
+            "icon_class_name": "radix-icons:dimensions",
+            "iconStyle": {
+                "cursor": "pointer"
+            }
+        },
+        "description": "Use the trained PCA model to transform the data",
+        "input_schema": {
+            "properties": {
+                "model_path": {
+                    "description": "The path to the PCA model.",
+                    "from_upstream": "always",
+                    "title": "Model Path",
+                    "type": "string"
+                },
+                "data_path": {
+                    "description": "The path to the train data to apply PCA.",
+                    "from_upstream": "always",
+                    "title": "Data Path",
+                    "type": "string"
+                },
+                "use_class_column": {
+                    "default": false,
+                    "description": "Whether to use the target column as class to plot.",
+                    "title": "Use Class Column",
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "model_path",
+                "data_path"
+            ],
+            "title": "InputModel",
+            "type": "object"
+        },
+        "output_schema": {
+            "properties": {
+                "pca_data_path": {
+                    "default": null,
+                    "title": "Pca Data Path",
+                    "type": "string"
+                }
+            },
+            "title": "OutputModel",
+            "type": "object"
+        },
+        "secrets_schema": null,
+        "source_url": "https://github.com/Tauffer-Consulting/ml_domino_pieces/tree/main/pieces/PCAInferencePiece"
+    },
+    "PCATrainPiece": {
+        "name": "PCATrainPiece",
+        "dependency": {
+            "dockerfile": null,
+            "requirements_file": "requirements_0.txt"
+        },
+        "tags": [
+            "preprocessing",
+            "dimensionality",
+            "reduction"
+        ],
+        "style": {
+            "node_label": "PCA Train Piece",
+            "node_type": "default",
+            "node_style": {
+                "backgroundColor": "#38b2be"
+            },
+            "useIcon": true,
+            "icon_class_name": "radix-icons:dimensions",
+            "iconStyle": {
+                "cursor": "pointer"
+            }
+        },
+        "description": "Applies PCA to the input data",
+        "input_schema": {
+            "properties": {
+                "data_path": {
+                    "description": "The path to the train data to apply PCA.",
+                    "from_upstream": "always",
+                    "title": "Train Data Path",
+                    "type": "string"
+                },
+                "n_components": {
+                    "default": 2,
+                    "description": "The number of components for PCA.",
+                    "title": "Number of Components",
+                    "type": "integer"
+                },
+                "use_class_column": {
+                    "default": false,
+                    "description": "Whether to use the target column as class to plot.",
+                    "title": "Use Class Column",
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "data_path"
+            ],
+            "title": "InputModel",
+            "type": "object"
+        },
+        "output_schema": {
+            "properties": {
+                "pca_data_path": {
+                    "title": "Pca Data Path",
+                    "type": "string"
+                },
+                "pca_model_path": {
+                    "title": "Pca Model Path",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "pca_data_path",
+                "pca_model_path"
+            ],
+            "title": "OutputModel",
+            "type": "object"
+        },
+        "secrets_schema": null,
+        "source_url": "https://github.com/Tauffer-Consulting/ml_domino_pieces/tree/main/pieces/PCATrainPiece"
+    },
+    "OpenCVFilterPiece": {
+        "name": "OpenCVFilterPiece",
+        "dependency": {
+            "dockerfile": "Dockerfile_opencv",
+            "requirements_file": null
+        },
+        "tags": [
+            "image",
+            "processing",
+            "filter"
+        ],
+        "style": {
+            "node_label": "OpenCV Filter Piece",
+            "node_type": "default",
+            "node_style": {
+                "backgroundColor": "#38b2be"
+            },
+            "useIcon": true,
+            "icon_class_name": "material-symbols:image-outline",
+            "iconStyle": {
+                "cursor": "pointer"
+            }
+        },
+        "description": "Piece that uses OpenCV filter on an Image",
+        "input_schema": {
+            "$defs": {
+                "FilterNaem": {
+                    "enum": [
+                        "canny",
+                        "binary"
+                    ],
+                    "title": "FilterNaem",
+                    "type": "string"
+                }
+            },
+            "properties": {
+                "image_path": {
+                    "description": "The path to the image to apply filter.",
+                    "from_upstream": "always",
+                    "title": "Image Path",
+                    "type": "string"
+                },
+                "filter_name": {
+                    "allOf": [
+                        {
+                            "$ref": "#/$defs/FilterNaem"
+                        }
+                    ],
+                    "default": "canny",
+                    "description": "The name of the filter to apply.",
+                    "title": "Filter Name"
+                }
+            },
+            "required": [
+                "image_path"
+            ],
+            "title": "InputModel",
+            "type": "object"
+        },
+        "output_schema": {
+            "properties": {
+                "image_path": {
+                    "description": "The path to the image with the filter applied.",
+                    "title": "Output image Path",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "image_path"
+            ],
+            "title": "OutputModel",
+            "type": "object"
+        },
+        "secrets_schema": null,
+        "source_url": "https://github.com/Tauffer-Consulting/ml_domino_pieces/tree/main/pieces/OpenCVFilterPiece"
+    },
+    "UMAPPiece": {
+        "name": "UMAPPiece",
+        "dependency": {
+            "dockerfile": null,
+            "requirements_file": "requirements_0.txt"
+        },
+        "tags": [
+            "preprocessing",
+            "dimensionality",
+            "reduction"
+        ],
+        "style": {
+            "node_label": "UMAP Piece",
+            "node_type": "default",
+            "node_style": {
+                "backgroundColor": "#38b2be"
+            },
+            "useIcon": true,
+            "icon_class_name": "radix-icons:dimensions",
+            "iconStyle": {
+                "cursor": "pointer"
+            }
+        },
+        "description": "Applies t-SNE to the data",
+        "container_resources": {
+            "requests": {
+                "cpu": 1000,
+                "memory": 1024
+            },
+            "limits": {
+                "cpu": 1000,
+                "memory": 1024
+            }
+        },
+        "input_schema": {
+            "properties": {
+                "data_path": {
+                    "description": "The path to the data to apply UMAP.",
+                    "from_upstream": "always",
+                    "title": "Data Path",
+                    "type": "string"
+                },
+                "n_components": {
+                    "default": 2,
+                    "description": "The number of dimensions for UMAP.",
+                    "title": "Number of Dimensions",
+                    "type": "integer"
+                },
+                "use_class_column": {
+                    "default": false,
+                    "description": "Whether to use the target column as class to plot.",
+                    "title": "Use Class Column",
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "data_path"
+            ],
+            "title": "InputModel",
+            "type": "object"
+        },
+        "output_schema": {
+            "properties": {
+                "umap_data_path": {
+                    "default": null,
+                    "title": "Umap Data Path",
+                    "type": "string"
+                }
+            },
+            "title": "OutputModel",
+            "type": "object"
+        },
+        "secrets_schema": null,
+        "source_url": "https://github.com/Tauffer-Consulting/ml_domino_pieces/tree/main/pieces/UMAPPiece"
+    },
+    "InferenceModelPiece": {
+        "name": "InferenceModelPiece",
+        "dependency": {
+            "dockerfile": null,
+            "requirements_file": "requirements_0.txt"
+        },
+        "tags": [
+            "modeling",
+            "machine_learning"
+        ],
+        "style": {
+            "node_label": "Inference Model Piece",
+            "node_type": "default",
+            "node_style": {
+                "backgroundColor": "#38b2be"
+            },
+            "useIcon": true,
+            "icon_class_name": "carbon:machine-learning-model",
+            "iconStyle": {
+                "cursor": "pointer"
+            }
+        },
+        "description": "Load a trained model and use it to make predictions on new data.",
+        "input_schema": {
+            "properties": {
+                "data_path": {
+                    "description": "Data path to inference on.",
+                    "from_upstream": "always",
+                    "title": "Data path",
+                    "type": "string"
+                },
+                "model_path": {
+                    "description": "Path to the model to use for inference.",
+                    "from_upstream": "always",
+                    "title": "Model path",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "data_path",
+                "model_path"
+            ],
+            "title": "InputModel",
+            "type": "object"
+        },
+        "output_schema": {
+            "properties": {
+                "data_path": {
+                    "title": "Data Path",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "data_path"
+            ],
+            "title": "OutputModel",
+            "type": "object"
+        },
+        "secrets_schema": null,
+        "source_url": "https://github.com/Tauffer-Consulting/ml_domino_pieces/tree/main/pieces/InferenceModelPiece"
+    },
     "TrainRandomForestClassifierPiece": {
         "name": "TrainRandomForestClassifierPiece",
         "dependency": {
@@ -93,203 +509,6 @@
         "secrets_schema": null,
         "source_url": "https://github.com/Tauffer-Consulting/ml_domino_pieces/tree/main/pieces/TrainRandomForestClassifierPiece"
     },
-    "StandardScalerPiece": {
-        "name": "StandardScalerPiece",
-        "dependency": {
-            "dockerfile": null,
-            "requirements_file": "requirements_0.txt"
-        },
-        "tags": [
-            "preprocessing",
-            "scaler"
-        ],
-        "style": {
-            "node_label": "Standard Scaler",
-            "node_type": "default",
-            "node_style": {
-                "backgroundColor": "#b3cde8"
-            },
-            "useIcon": true,
-            "icon_class_name": "icon-park-outline:split",
-            "iconStyle": {
-                "cursor": "pointer"
-            }
-        },
-        "description": "Apply StandardScaler to the data",
-        "input_schema": {
-            "properties": {
-                "train_data_path": {
-                    "description": "The path to the train data to be scaled.",
-                    "from_upstream": "always",
-                    "title": "Train Data Path",
-                    "type": "string"
-                },
-                "test_data_path": {
-                    "description": "The path to the test data to be scaled.",
-                    "from_upstream": "always",
-                    "title": "Test Data Path",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "train_data_path",
-                "test_data_path"
-            ],
-            "title": "InputModel",
-            "type": "object"
-        },
-        "output_schema": {
-            "properties": {
-                "train_data_path": {
-                    "title": "Train Data Path",
-                    "type": "string"
-                },
-                "test_data_path": {
-                    "title": "Test Data Path",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "train_data_path",
-                "test_data_path"
-            ],
-            "title": "OutputModel",
-            "type": "object"
-        },
-        "secrets_schema": null,
-        "source_url": "https://github.com/Tauffer-Consulting/ml_domino_pieces/tree/main/pieces/StandardScalerPiece"
-    },
-    "TSNEPiece": {
-        "name": "TSNEPiece",
-        "dependency": {
-            "dockerfile": null,
-            "requirements_file": "requirements_0.txt"
-        },
-        "tags": [
-            "preprocessing",
-            "dimensionality",
-            "reduction"
-        ],
-        "style": {
-            "node_label": "t-SNE Piece",
-            "node_type": "default",
-            "node_style": {
-                "backgroundColor": "#38b2be"
-            },
-            "useIcon": true,
-            "icon_class_name": "radix-icons:dimensions",
-            "iconStyle": {
-                "cursor": "pointer"
-            }
-        },
-        "description": "Applies t-SNE to the data",
-        "input_schema": {
-            "properties": {
-                "data_path": {
-                    "description": "The path to data to apply t-SNE.",
-                    "from_upstream": "always",
-                    "title": "Data Path",
-                    "type": "string"
-                },
-                "n_components": {
-                    "default": 2,
-                    "description": "The number of dimensions t-SNE.",
-                    "title": "Number of Dimensions",
-                    "type": "integer"
-                },
-                "use_class_column": {
-                    "default": false,
-                    "description": "Whether to use the target column as class to plot.",
-                    "title": "Use Class Column",
-                    "type": "boolean"
-                }
-            },
-            "required": [
-                "data_path"
-            ],
-            "title": "InputModel",
-            "type": "object"
-        },
-        "output_schema": {
-            "properties": {
-                "tsne_data_path": {
-                    "default": null,
-                    "title": "Tsne Data Path",
-                    "type": "string"
-                }
-            },
-            "title": "OutputModel",
-            "type": "object"
-        },
-        "secrets_schema": null,
-        "source_url": "https://github.com/Tauffer-Consulting/ml_domino_pieces/tree/main/pieces/TSNEPiece"
-    },
-    "PCAInferencePiece": {
-        "name": "PCAInferencePiece",
-        "dependency": {
-            "dockerfile": null,
-            "requirements_file": "requirements_0.txt"
-        },
-        "tags": [
-            "preprocessing",
-            "dimensionality",
-            "reduction"
-        ],
-        "style": {
-            "node_label": "PCA Inference Piece",
-            "node_type": "default",
-            "node_style": {
-                "backgroundColor": "#38b2be"
-            },
-            "useIcon": true,
-            "icon_class_name": "radix-icons:dimensions",
-            "iconStyle": {
-                "cursor": "pointer"
-            }
-        },
-        "description": "Use the trained PCA model to transform the data",
-        "input_schema": {
-            "properties": {
-                "model_path": {
-                    "description": "The path to the PCA model.",
-                    "from_upstream": "always",
-                    "title": "Model Path",
-                    "type": "string"
-                },
-                "data_path": {
-                    "description": "The path to the train data to apply PCA.",
-                    "from_upstream": "always",
-                    "title": "Data Path",
-                    "type": "string"
-                },
-                "use_class_column": {
-                    "default": false,
-                    "description": "Whether to use the target column as class to plot.",
-                    "title": "Use Class Column",
-                    "type": "boolean"
-                }
-            },
-            "required": [
-                "model_path",
-                "data_path"
-            ],
-            "title": "InputModel",
-            "type": "object"
-        },
-        "output_schema": {
-            "properties": {
-                "pca_data_path": {
-                    "default": null,
-                    "title": "Pca Data Path",
-                    "type": "string"
-                }
-            },
-            "title": "OutputModel",
-            "type": "object"
-        },
-        "secrets_schema": null,
-        "source_url": "https://github.com/Tauffer-Consulting/ml_domino_pieces/tree/main/pieces/PCAInferencePiece"
-    },
     "TrainTestSplitPiece": {
         "name": "TrainTestSplitPiece",
         "dependency": {
@@ -361,8 +580,8 @@
         "secrets_schema": null,
         "source_url": "https://github.com/Tauffer-Consulting/ml_domino_pieces/tree/main/pieces/TrainTestSplitPiece"
     },
-    "PCATrainPiece": {
-        "name": "PCATrainPiece",
+    "TSNEPiece": {
+        "name": "TSNEPiece",
         "dependency": {
             "dockerfile": null,
             "requirements_file": "requirements_0.txt"
@@ -373,79 +592,7 @@
             "reduction"
         ],
         "style": {
-            "node_label": "PCA Train Piece",
-            "node_type": "default",
-            "node_style": {
-                "backgroundColor": "#38b2be"
-            },
-            "useIcon": true,
-            "icon_class_name": "radix-icons:dimensions",
-            "iconStyle": {
-                "cursor": "pointer"
-            }
-        },
-        "description": "Applies PCA to the input data",
-        "input_schema": {
-            "properties": {
-                "data_path": {
-                    "description": "The path to the train data to apply PCA.",
-                    "from_upstream": "always",
-                    "title": "Train Data Path",
-                    "type": "string"
-                },
-                "n_components": {
-                    "default": 2,
-                    "description": "The number of components for PCA.",
-                    "title": "Number of Components",
-                    "type": "integer"
-                },
-                "use_class_column": {
-                    "default": false,
-                    "description": "Whether to use the target column as class to plot.",
-                    "title": "Use Class Column",
-                    "type": "boolean"
-                }
-            },
-            "required": [
-                "data_path"
-            ],
-            "title": "InputModel",
-            "type": "object"
-        },
-        "output_schema": {
-            "properties": {
-                "pca_data_path": {
-                    "title": "Pca Data Path",
-                    "type": "string"
-                },
-                "pca_model_path": {
-                    "title": "Pca Model Path",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "pca_data_path",
-                "pca_model_path"
-            ],
-            "title": "OutputModel",
-            "type": "object"
-        },
-        "secrets_schema": null,
-        "source_url": "https://github.com/Tauffer-Consulting/ml_domino_pieces/tree/main/pieces/PCATrainPiece"
-    },
-    "UMAPPiece": {
-        "name": "UMAPPiece",
-        "dependency": {
-            "dockerfile": null,
-            "requirements_file": "requirements_0.txt"
-        },
-        "tags": [
-            "preprocessing",
-            "dimensionality",
-            "reduction"
-        ],
-        "style": {
-            "node_label": "UMAP Piece",
+            "node_label": "t-SNE Piece",
             "node_type": "default",
             "node_style": {
                 "backgroundColor": "#38b2be"
@@ -457,27 +604,17 @@
             }
         },
         "description": "Applies t-SNE to the data",
-        "container_resources": {
-            "requests": {
-                "cpu": 1000,
-                "memory": 1024
-            },
-            "limits": {
-                "cpu": 1000,
-                "memory": 1024
-            }
-        },
         "input_schema": {
             "properties": {
                 "data_path": {
-                    "description": "The path to the data to apply UMAP.",
+                    "description": "The path to data to apply t-SNE.",
                     "from_upstream": "always",
                     "title": "Data Path",
                     "type": "string"
                 },
                 "n_components": {
                     "default": 2,
-                    "description": "The number of dimensions for UMAP.",
+                    "description": "The number of dimensions t-SNE.",
                     "title": "Number of Dimensions",
                     "type": "integer"
                 },
@@ -496,9 +633,9 @@
         },
         "output_schema": {
             "properties": {
-                "umap_data_path": {
+                "tsne_data_path": {
                     "default": null,
-                    "title": "Umap Data Path",
+                    "title": "Tsne Data Path",
                     "type": "string"
                 }
             },
@@ -506,143 +643,6 @@
             "type": "object"
         },
         "secrets_schema": null,
-        "source_url": "https://github.com/Tauffer-Consulting/ml_domino_pieces/tree/main/pieces/UMAPPiece"
-    },
-    "OpenCVFilterPiece": {
-        "name": "OpenCVFilterPiece",
-        "dependency": {
-            "dockerfile": "Dockerfile_opencv",
-            "requirements_file": null
-        },
-        "tags": [
-            "image",
-            "processing",
-            "filter"
-        ],
-        "style": {
-            "node_label": "OpenCV Filter Piece",
-            "node_type": "default",
-            "node_style": {
-                "backgroundColor": "#38b2be"
-            },
-            "useIcon": true,
-            "icon_class_name": "material-symbols:image-outline",
-            "iconStyle": {
-                "cursor": "pointer"
-            }
-        },
-        "description": "Piece that uses OpenCV filter on an Image",
-        "input_schema": {
-            "$defs": {
-                "FilterNaem": {
-                    "enum": [
-                        "canny",
-                        "binary"
-                    ],
-                    "title": "FilterNaem",
-                    "type": "string"
-                }
-            },
-            "properties": {
-                "image_path": {
-                    "description": "The path to the image to apply filter.",
-                    "from_upstream": "always",
-                    "title": "Image Path",
-                    "type": "string"
-                },
-                "filter_name": {
-                    "allOf": [
-                        {
-                            "$ref": "#/$defs/FilterNaem"
-                        }
-                    ],
-                    "default": "canny",
-                    "description": "The name of the filter to apply.",
-                    "title": "Filter Name"
-                }
-            },
-            "required": [
-                "image_path"
-            ],
-            "title": "InputModel",
-            "type": "object"
-        },
-        "output_schema": {
-            "properties": {
-                "image_path": {
-                    "description": "The path to the image with the filter applied.",
-                    "title": "Output image Path",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "image_path"
-            ],
-            "title": "OutputModel",
-            "type": "object"
-        },
-        "secrets_schema": null,
-        "source_url": "https://github.com/Tauffer-Consulting/ml_domino_pieces/tree/main/pieces/OpenCVFilterPiece"
-    },
-    "InferenceModelPiece": {
-        "name": "InferenceModelPiece",
-        "dependency": {
-            "dockerfile": null,
-            "requirements_file": "requirements_0.txt"
-        },
-        "tags": [
-            "modeling",
-            "machine_learning"
-        ],
-        "style": {
-            "node_label": "Inference Model Piece",
-            "node_type": "default",
-            "node_style": {
-                "backgroundColor": "#38b2be"
-            },
-            "useIcon": true,
-            "icon_class_name": "carbon:machine-learning-model",
-            "iconStyle": {
-                "cursor": "pointer"
-            }
-        },
-        "description": "Load a trained model and use it to make predictions on new data.",
-        "input_schema": {
-            "properties": {
-                "data_path": {
-                    "description": "Data path to inference on.",
-                    "from_upstream": "always",
-                    "title": "Data path",
-                    "type": "string"
-                },
-                "model_path": {
-                    "description": "Path to the model to use for inference.",
-                    "from_upstream": "always",
-                    "title": "Model path",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "data_path",
-                "model_path"
-            ],
-            "title": "InputModel",
-            "type": "object"
-        },
-        "output_schema": {
-            "properties": {
-                "data_path": {
-                    "title": "Data Path",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "data_path"
-            ],
-            "title": "OutputModel",
-            "type": "object"
-        },
-        "secrets_schema": null,
-        "source_url": "https://github.com/Tauffer-Consulting/ml_domino_pieces/tree/main/pieces/InferenceModelPiece"
+        "source_url": "https://github.com/Tauffer-Consulting/ml_domino_pieces/tree/main/pieces/TSNEPiece"
     }
 }
